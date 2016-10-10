@@ -9,12 +9,6 @@ namespace ChildhoodMinistry.DAL
 {
     public class ChildhoodRepository : IRepository<Childhood>//IChildhoodRepository//, IDisposable
     {
-        //private IContextDB _context;
-
-        //public ChildhoodRepository(IContextDB context)
-        //{
-        //    this._context = context;
-        //}
 
         public List<Childhood> GetItems()
         {

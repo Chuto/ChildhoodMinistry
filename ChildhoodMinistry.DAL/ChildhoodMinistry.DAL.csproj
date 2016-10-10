@@ -52,8 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextDB.cs" />
-    <Compile Include="Intarface\IChildhoodRepository.cs" />
-    <Compile Include="Intarface\IChildRepository.cs" />
     <Compile Include="Intarface\IContextDB.cs" />
     <Compile Include="Intarface\IRepository.cs" />
     <Compile Include="Migrations\201609102235441_init.cs" />

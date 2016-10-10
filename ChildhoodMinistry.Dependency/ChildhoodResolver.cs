@@ -20,7 +20,6 @@ namespace ChildhoodMinistry.Dependency
         public ChildhoodResolver()
         {
             this.container = new UnityContainer();
-            //container.RegisterType<IContext, ContextDB>();
 
             container.RegisterType<IChildhoodService, ChildhoodService>();
             container.RegisterType<IRepository<Childhood>, ChildhoodRepository>();

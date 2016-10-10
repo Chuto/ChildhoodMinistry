@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace ChildhoodMinistry.BL
 {
-    public class ChildhoodService : IChildhoodService//, IDisposable
+    public class ChildhoodService : IChildhoodService
     {
         private IRepository<Childhood> childhoods;
 

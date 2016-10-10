@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChildhoodMinistry.BL
 {
-    public interface IChildService : ICRUDService<ChildViewModel>//, IDisposable
+    public interface IChildService : ICRUDService<ChildViewModel>
     {
         List<ChildViewModel> GetChildByChildhoodId(int id);
     }

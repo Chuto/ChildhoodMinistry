@@ -9,13 +9,6 @@ namespace ChildhoodMinistry.DAL
 {
     public class ChildRepository : IRepository<Child>//IChildRepository
     {
-        //private readonly IContextDB _context;
-
-        //public ChildRepository(IContextDB context)
-        //{
-        //    this._context = context;
-        //}
-
         public List<Child> GetItems()
         {
             var result = new List<Child>();

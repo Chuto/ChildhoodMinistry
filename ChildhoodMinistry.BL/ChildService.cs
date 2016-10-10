@@ -7,7 +7,7 @@ using System;
 
 namespace ChildhoodMinistry.BL
 {
-    public class ChildService : IChildService//, IDisposable
+    public class ChildService : IChildService
     {
         private IRepository<Child> children;
 
