@@ -7,7 +7,7 @@ using System;
 
 namespace ChildhoodMinistry.DAL
 {
-    public class ChildhoodRepository : IRepository<Childhood>//IChildhoodRepository//, IDisposable
+    public class ChildhoodRepository : IRepository<Childhood>
     {
 
         public List<Childhood> GetItems()
@@ -15,9 +15,15 @@ namespace ChildhoodMinistry.DAL
             var result = new List<Childhood>();
             using (var db = new ContextDB())
             {
+                var result1 = db.childhoods_data.ToList();
+                ;
+            }
+            using (var db = new ContextDB())
+            {
                 result = (from items in db.childhoods_data
                         select items).ToList();
             }
+
             return result;
         }
 
@@ -50,25 +56,5 @@ namespace ChildhoodMinistry.DAL
                 db.save();
             }
         }
-
-        //private bool disposed = false;
-
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!this.disposed)
-        //    {
-        //        if (disposing)
-        //        {
-        //            _context.Dispose();
-        //        }
-        //    }
-        //    this.disposed = true;
-        //}
-
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
     }
 }

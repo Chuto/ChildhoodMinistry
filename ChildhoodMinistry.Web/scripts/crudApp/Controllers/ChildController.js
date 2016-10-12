@@ -1,14 +1,12 @@
-﻿app.controller("ChildCRUDCtrl", function ($scope, crudChildService, crudFactory) {
-    $scope.crudFactory = crudFactory;
-    $scope.divEdit = false;
-    GetAllChildren();
+﻿app.controller("ChildCRUDCtrl", function ($scope, crudChildService ) {
 
+    if ($scope.childhoodNum === undefined)
+        GetAllChildren();
 
     function GetAllChildren() {
         var getData = crudChildService.getChildren();
         getData.then(function (child) {
             $scope.children = child.data;
-            $scope.crudFactory.children = child.data;
         }, function () {
             alert('Ошибка чтения записи');
         });
@@ -34,7 +32,7 @@
         var getData = crudChildService.AddChild(Child);
         getData.then(function (msg) {
             if ($scope.childhoodNum)
-                $scope.GetChildrenList($scope.childhoodNum);
+                $scope.GetChildrenList(parseInt($scope.childhoodNum));
             else
                 GetAllChildren();
             alert(msg.data);
@@ -50,8 +48,8 @@
         var getData = crudChildService.updateChild(Child);
         getData.then(function (msg) {
             if ($scope.childhoodNum)
-                $scope.GetChildrenList($scope.childhoodNum);
-            else
+                $scope.GetChildrenList(parseInt($scope.childhoodNum));
+            else                
                 GetAllChildren();
             alert(msg.data);
             $scope.divEdit = false;
@@ -75,7 +73,10 @@
         getData.then(function (msg) {
             alert(msg.data);
             $scope.divEdit = false;
-            GetAllChildren();
+            if ($scope.childhoodNum)
+                $scope.GetChildrenList(parseInt($scope.childhoodNum));
+            else
+                GetAllChildren();
         }, function () {
             alert('Ошибка удаления записи');
         });

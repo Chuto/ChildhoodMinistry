@@ -228,7 +228,7 @@
       <Name>ChildhoodMinistry.BL</Name>
     </ProjectReference>
     <ProjectReference Include="..\ChildhoodMinistry.Dependency\ChildhoodMinistry.Dependency.csproj">
-      <Project>{7318D103-0AD7-4C43-A3EB-9EC400FE587B}</Project>
+      <Project>{7318d103-0ad7-4c43-a3eb-9ec400fe587b}</Project>
       <Name>ChildhoodMinistry.Dependency</Name>
     </ProjectReference>
     <ProjectReference Include="..\ChildhoodMinistry.ViewModel\ChildhoodMinistry.ViewModel.csproj">

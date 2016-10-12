@@ -5,12 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using ChildhoodMinistry.ViewModel;
 using ChildhoodMinistry.BL;
+using Microsoft.Practices.Unity;
 
 namespace ChildhoodMinistry.Web.Controllers
 {
     public class HomeController : Controller
     {
-
         public ActionResult Index()
         {
             return View();

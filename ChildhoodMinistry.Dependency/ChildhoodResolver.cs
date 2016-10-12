@@ -21,12 +21,11 @@ namespace ChildhoodMinistry.Dependency
         {
             this.container = new UnityContainer();
 
-            container.RegisterType<IChildhoodService, ChildhoodService>();
-            container.RegisterType<IRepository<Childhood>, ChildhoodRepository>();
+            container.RegisterType<IChildhoodService, ChildhoodService>(new TransientLifetimeManager());
+            container.RegisterType<IRepository<Childhood>, ChildhoodRepository>(new TransientLifetimeManager());
 
-            container.RegisterType<IChildService, ChildService>();
-            container.RegisterType<IRepository<Child>, ChildRepository>();
-            
+            container.RegisterType<IChildService, ChildService>(new TransientLifetimeManager());
+            container.RegisterType<IRepository<Child>, ChildRepository>(new TransientLifetimeManager());
         }
 
         public object GetService(Type serviceType)
@@ -37,8 +36,7 @@ namespace ChildhoodMinistry.Dependency
             }
             catch
             {
-                // TODO: Вернуть нормальную ошибку
-                return null; //this.resolver.GetService(serviceType);
+                return null;
             }
         }
 
@@ -50,8 +48,7 @@ namespace ChildhoodMinistry.Dependency
             }
             catch
             {
-                // TODO: Вернуть нормальную ошибку
-                return new List<object>();//resolver.GetServices(serviceType);
+                return new List<object>();
             }
         }
 

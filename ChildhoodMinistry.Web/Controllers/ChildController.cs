@@ -81,13 +81,5 @@ namespace ChildhoodMinistry.Web.Controllers
             }
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        service.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

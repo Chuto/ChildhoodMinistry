@@ -7,7 +7,7 @@ using System;
 
 namespace ChildhoodMinistry.DAL
 {
-    public class ChildRepository : IRepository<Child>//IChildRepository
+    public class ChildRepository : IRepository<Child>
     {
         public List<Child> GetItems()
         {
@@ -52,25 +52,5 @@ namespace ChildhoodMinistry.DAL
                 db.save();
             }
         }
-
-        //private bool disposed = false;
-
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!this.disposed)
-        //    {
-        //        if (disposing)
-        //        {  
-        //            _context.Dispose();
-        //        }
-        //    }
-        //    this.disposed = true;
-        //}
-
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
     }
 }

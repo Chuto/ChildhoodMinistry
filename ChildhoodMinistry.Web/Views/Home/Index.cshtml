@@ -25,7 +25,69 @@
     <li>( ASP.NET MVC | ASP.NET WebAPI + ( Angular | React | Knockout ) )</li>
 </ul>
 
-<h2>Замечания:</h2>
+<h2>Замечания2:</h2>
+<ol>    
+    <li>
+        «ChildhoodRepository.GetItems() возвращает IEnumerable а соответственно всю таблицу из базы вместе с собой, что очень неэффективно при существенных объёмах данных.»
+        В этом плане ничего не изменилось, IEnumerable тянется с самого нижнего слоя приложения, только теперь в виде List.
+    </li>
+    <li>
+        «Неэффективное использование ангуляра для реализации добавления/редактирования. Стоило бы использовать отдельные контроллеры/темплейты/директивы для изолирования ответственности компонент.»
+        В добавленой директиве стоит использовать изолированый scope. Контроллеры по-прежнему сделаны слишком сложно для простого CRUD приложения.
+    </li>
+    <li>
+        Непонятное использование Generic`ов в ChildhoodRepository, ChildRepository, для чего они там вообще?
+        public class ChildhoodRepository&lt;T&gt;: IChildhoodMinistry&lt;T&gt;, IDisposable where T : Childhood
+        public class ChildRepository&lt;T&gt;: IChildhoodMinistry&lt;T&gt;, IDisposable where T : Child
+        В чем цель интерфейса IChildhoodMinistry? Зачем методы SetChildren и SetChildhoods в ContextDB?
+    </li>
+    <li>
+        public object GetService(Type serviceType)
+        {
+        try
+        {
+        return container.Resolve(serviceType);
+        }
+        catch
+        {
+        return null;
+        }
+        }
+        Какой смысл так делать?
+        Пример: по какой-то причине зависимость не зерезолвилась, упало исключение, скорее всего поясняющее почему зависимость не зерезолвилась. Мы ловим это исключение и возвращаем null. Далее скорее всего где-то упадет NullReferenceException… Итого разработчику это ни о чем не скажет, кроме того, что где-то есть баг... получается мы осознанно пытаемся запутать разработчика, который будет в будущем работать с этим кодом...
+    </li>
+    <li>
+        Стоит задать время жизни зависимостей в контейнере явно, чтобы было видно какая зависимость имеет какой Life time. Очень полезной будет книга Dependency Injection in .NET (Mark Seemann)
+    </li>
+    <li>
+        Встречаются copy-paste фрагменты кода. Любой повторяющийся код – это потенциально не хорошо и если от этого можно избавиться, то это надо делать. Хорошая книга: Refactoring: Improving the Design of Existing Code (Martin Fowler), книга просто написана, за пару больших вечеров читается.
+    </li>
+    <li>
+        protected virtual void Dispose(bool disposing)
+        {
+        if (!this.disposed)
+        {
+        if (disposing)
+        {
+        _context.Dispose();
+        }
+        }
+        this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+        }
+        Не совсем верно используется Disposable Pattern (не там). О нем можно почитать в книге Clr via C# Джефри Рихтера (Классика для .net программиста, но для новичка всю ее читать будет сложно, зато если всю прочтешь и поймешь, то без работы не останешся никогда...).
+    </li>
+    <li>
+        В чем отличие ICRUDService от репозиотрия? Разберись, обдумай, и внеси правки.
+    </li>
+</ol>
+
+<h2>Замечания1:</h2>
 <ol>
     <li>Не отличить ViewModel/Entity которые использует entity framework: это в проекте одно и тоже, и используется на всех уровнях в приложении.</li>
     <i>Добавлены модели для DAL</i>

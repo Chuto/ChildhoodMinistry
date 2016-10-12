@@ -1,6 +1,5 @@
-﻿app.controller("ChildhoodCRUDCtrl", function ($scope, crudChildhoodService, crudFactory) {
-    $scope.crudFactory = crudFactory;
-    $scope.divEdit = false;
+﻿app.controller("ChildhoodCRUDCtrl", function ($scope, crudChildhoodService) {
+
     GetAllChildhoods();
 
     function GetAllChildhoods() {
@@ -14,12 +13,13 @@
 
     $scope.GetChildrenList = function (childhoodId) {
         var getData = crudChildhoodService.getChildrenList(childhoodId);
-        getData.then(function (_childrenList) {
-            //$scope.children = _childrenList.data;
-            $scope.crudFactory.children = _childrenList.data;
+        getData.then(function (childrenList) {
+            $scope.children = childrenList.data;
             $scope.childhoodNum = childhoodId;
+
             $scope.divList = true;
             $scope.divEdit = false;
+
         }, function () {
             alert('Ошибка чтения записи');
         });
@@ -65,14 +65,7 @@
         $scope.edit = false;
     }
 
-    $scope.AddChildhoodDiv = function () {
-        $scope.childhood = null;
-        $scope.Action = "Добавление";
-        $scope.save = true;
-        $scope.edit = false;
-        $scope.divEdit = true;
-        $scope.divList = false;
-    }
+
 
     $scope.DeleteChildhood = function (childhood) {
         var getData = crudChildhoodService.DeleteChildhood(childhood.Ind);
@@ -84,6 +77,15 @@
         }, function () {
             alert('Ошибка удаления записи');
         });
+    }
+
+    $scope.AddChildhoodDiv = function () {
+        $scope.childhood = null;
+        $scope.Action = "Добавление";
+        $scope.save = true;
+        $scope.edit = false;
+        $scope.divEdit = true;
+        $scope.divList = false;
     }
 
     $scope.CancelChildrenList = function () {

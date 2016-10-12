@@ -6,7 +6,7 @@
 <h2>Список детсадов</h2>
 <div ng-controller="ChildhoodCRUDCtrl">
     <div class="data">
-        <table class="table table-hover">
+        <table class="table table-hover" ng-cloak>
             <tr>
                 <td>Номер детсада</td>
                 <td>Адрес</td>
@@ -28,7 +28,7 @@
     </div>
     <span ng-click="AddChildhoodDiv()" class="btn btn-default">Добавить детсад</span>
     <div ng-show="divEdit">
-        <table class="table">
+        <table class="table" ng-cloak>
             <tr>
                 <td>{{Action}} записи</td>
                 <td></td>
@@ -61,10 +61,9 @@
         </table>
     </div>
 
-    <div ng-show="divList" ng-controller="ChildCRUDCtrl">
-        <div class="data">
-            <div dir-list-items typeof="list" />
-        </div>
+    <div ng-show="divList" ng-cloak>
+            <div dir-list-items typeof="list" children="children" childhoodnum="{{childhoodNum}}" f="GetChildrenList"></div>
+
         <input type="button" ng-click="CancelChildrenList()" class="btn btn-danger" value="Закрыть" />
     </div>
 </div>
