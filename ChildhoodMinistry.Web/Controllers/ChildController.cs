@@ -70,9 +70,9 @@ namespace ChildhoodMinistry.Web.Controllers
         [HttpPost]
         public JsonResult DeleteChild(string id)
         {
-            if (!String.IsNullOrEmpty(id))
+            if (id!=String.Empty)
             {
-                service.DeleteItem(Convert.ToInt32(id));
+                service.DeleteItem(Int32.Parse(id));
                 return Json("Запись успешно удалена");
             }
             else

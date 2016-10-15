@@ -10,7 +10,7 @@
         }, function () {
             alert('Ошибка чтения записи');
         });
-    }
+    };
 
     $scope.EditChild = function (child) {
         GetChildhoodNum();
@@ -24,7 +24,7 @@
         }, function () {
             alert('Ошибка чтения записи');
         });
-    }
+    };
 
     $scope.AddChild = function () {
         var Child = $scope.child;
@@ -41,7 +41,7 @@
             alert('Ошибка обновления записи');
         });
         $scope.save = false;
-    }
+    };
 
     $scope.UpdateChild = function () {
         var Child = $scope.child;
@@ -49,7 +49,7 @@
         getData.then(function (msg) {
             if ($scope.childhoodNum)
                 $scope.GetChildrenList(parseInt($scope.childhoodNum));
-            else                
+            else
                 GetAllChildren();
             alert(msg.data);
             $scope.divEdit = false;
@@ -57,7 +57,7 @@
             alert('Ошибка добавления записи');
         });
         $scope.edit = false;
-    }
+    };
 
     $scope.AddChildDiv = function () {
         $scope.child = null;
@@ -66,7 +66,7 @@
         $scope.save = true;
         $scope.Action = "Добавление";
         $scope.divEdit = true;
-    }
+    };
 
     $scope.DeleteChild = function (child) {
         var getData = crudChildService.DeleteChild(child.Ind);
@@ -80,7 +80,7 @@
         }, function () {
             alert('Ошибка удаления записи');
         });
-    }
+    };
 
     function GetChildhoodNum() {
         var childhoods = crudChildService.getChildhoodNum();
@@ -89,7 +89,7 @@
         }, function () {
             alert('Ошибка чтения записи');
         });
-    }
+    };
 
     $scope.Cancel = function () {
         $scope.divEdit = false;

@@ -1,29 +1,40 @@
-﻿@{
-    ViewBag.Title = "Angular";
+﻿@model PagedList.IPagedList<ChildhoodMinistry.ViewModel.ChildhoodViewModel>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Angular2";
 }
 
 <h2>Список детсадов</h2>
 <div ng-controller="ChildhoodCRUDCtrl">
     <div class="data">
-        <table class="table table-hover" >
+        <table class="table table-hover">
             <tr>
                 <td>Номер детсада</td>
                 <td>Адрес</td>
             </tr>
-            <tr ng-repeat="childhood in childhoods" ng-cloak>
-                <td>
-                    {{childhood.Number}}
-                </td>
-                <td>
-                    {{childhood.Adress}}
-                </td>
-                <td>
-                    <span ng-click="GetChildrenList(childhood.Number)" class="btn btn-primary">Список детей</span>
-                    <span ng-click="EditChildhood(childhood)" class="btn btn-primary">Редактировать</span>
-                    <span ng-click="DeleteChildhood(childhood)" class="btn btn-danger">Удалить</span>
-                </td>
-            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Adress)
+                    </td>
+                    <td>
+                        <span ng-click="GetChildrenList(@item.Number)" class="btn btn-primary">Список детей</span>
+                        <span ng-click="EditChildhood(@item)" class="btn btn-primary">Редактировать</span>
+                        <span ng-click="DeleteChildhood(@item)" class="btn btn-danger">Удалить</span>
+                    </td>
+                </tr>
+            }
         </table>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index2", "Childhood",
+   new { sortOrder = ViewBag.CurrentSort, page, currentFilter = ViewBag.CurrentFilter }))
+
     </div>
     <span ng-click="AddChildhoodDiv()" class="btn btn-default" ng-cloak>Добавить детсад</span>
     <div ng-show="divEdit" ng-cloak>
@@ -62,7 +73,7 @@
 
     <div ng-show="divList" ng-cloak>
         <h2>Список детей</h2>
-            <div dir-list-items typeof="list" children="children" childhood-num="{{childhoodNum}}" get-children-list="GetChildrenList"></div>
+        <div dir-list-items typeof="list" children="children" childhood-num="{{childhoodNum}}" get-children-list="GetChildrenList"></div>
 
         <input type="button" ng-click="CancelChildrenList()" class="btn btn-danger" value="Закрыть" />
     </div>

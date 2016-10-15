@@ -19,10 +19,10 @@ namespace ChildhoodMinistry.BL
         public List<ChildhoodViewModel> GetItems()
         {
             var result = new List<ChildhoodViewModel>();
-            foreach (var obj in childhoods.GetItems())
+            foreach (Childhood obj in childhoods.GetItems())
             {
                 result.Add(new ChildhoodViewModel()
-                {
+                {                    
                     Ind = obj.Id,
                     Number = obj.Number,
                     Adress = obj.Adress
@@ -47,7 +47,8 @@ namespace ChildhoodMinistry.BL
 
         public List<int> GetChildhoodNum()
         {
-            return childhoods.GetItems().Select(s => s.Number).ToList();
+            return (from nums in childhoods.GetItems()
+                    select nums.Number).ToList();
         }
 
         public void InsertItem(ChildhoodViewModel item)
@@ -55,6 +56,7 @@ namespace ChildhoodMinistry.BL
             childhoods.InsertItem(new Childhood()
             {
                 Id = item.Ind,
+                guid = Guid.NewGuid().ToString(),
                 Number = item.Number,
                 Adress = item.Adress
             });
@@ -67,12 +69,15 @@ namespace ChildhoodMinistry.BL
                 Id = item.Ind,
                 Number = item.Number,
                 Adress = item.Adress
-            });
+            }, item.Ind);
         }
 
         public void DeleteItem(int id)
         {
-            childhoods.DeleteItem(id);
+            var obj = (from item in childhoods.GetItems()
+                       where item.Id == id
+                       select item).First();
+            childhoods.DeleteItem(obj);
         }
     }
 }

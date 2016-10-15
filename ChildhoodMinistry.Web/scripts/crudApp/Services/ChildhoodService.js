@@ -13,7 +13,7 @@
             }
         });
         return response;
-    }
+    };
 
     this.updateChildhood = function (childhood) {
         var response = $http({
@@ -23,7 +23,7 @@
             dataType: "json"
         });
         return response;
-    }
+    };
 
     this.getChildrenList = function (childhoodId) {
         var response = $http({
@@ -34,7 +34,7 @@
             }
         });
         return response;
-    }
+    };
 
     this.AddChildhood = function (childhood) {
         var response = $http({
@@ -44,7 +44,7 @@
             dataType: "json"
         });
         return response;
-    }
+    };
 
     this.DeleteChildhood = function (childhoodId) {
         var response = $http({
@@ -55,5 +55,5 @@
             }
         });
         return response;
-    }
+    };
 });

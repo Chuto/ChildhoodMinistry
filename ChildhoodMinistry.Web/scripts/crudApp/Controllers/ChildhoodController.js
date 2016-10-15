@@ -9,7 +9,7 @@
         }, function () {
             alert('Ошибка чтения записи');
         });
-    }
+    };
 
     $scope.GetChildrenList = function (childhoodId) {
         var getData = crudChildhoodService.getChildrenList(childhoodId);
@@ -23,7 +23,7 @@
         }, function () {
             alert('Ошибка чтения записи');
         });
-    }
+    };
 
     $scope.EditChildhood = function (childhood) {
         $scope.edit = true;
@@ -37,10 +37,10 @@
         }, function () {
             alert('Ошибка чтения записи');
         });
-    }
+    };
 
     $scope.AddChildhood = function () {
-        var Childhood = $scope.childhood
+        var Childhood = $scope.childhood;
         var getData = crudChildhoodService.AddChildhood(Childhood);
         getData.then(function (msg) {
             GetAllChildhoods();
@@ -49,11 +49,11 @@
         }, function () {
             alert('Ошибка добавления записи');
         });
-        $scope.save = false
-    }
+        $scope.save = false;
+    };
 
     $scope.UpdateChildhood = function () {
-        var Childhood = $scope.childhood
+        var Childhood = $scope.childhood;
         var getData = crudChildhoodService.updateChildhood(Childhood);
         getData.then(function (msg) {
             GetAllChildhoods();
@@ -63,7 +63,7 @@
             alert('Ошибка обновления записи');
         });
         $scope.edit = false;
-    }
+    };
 
 
 
@@ -77,7 +77,7 @@
         }, function () {
             alert('Ошибка удаления записи');
         });
-    }
+    };
 
     $scope.AddChildhoodDiv = function () {
         $scope.childhood = null;
@@ -86,7 +86,7 @@
         $scope.edit = false;
         $scope.divEdit = true;
         $scope.divList = false;
-    }
+    };
 
     $scope.CancelChildrenList = function () {
         $scope.divEdit = false;

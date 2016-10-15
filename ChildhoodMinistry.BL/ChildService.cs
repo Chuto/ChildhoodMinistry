@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
+using ChildhoodMinistry.DAL.Repository;
+
 namespace ChildhoodMinistry.BL
 {
     public class ChildService : IChildService
@@ -72,6 +74,7 @@ namespace ChildhoodMinistry.BL
         {
             children.InsertItem(new Child() {
                 Id = item.Ind,
+                guid = Guid.NewGuid().ToString(),
                 Name = item.Name,
                 Surname = item.Surname,
                 Patronymic = item.Patronymic,
@@ -90,12 +93,15 @@ namespace ChildhoodMinistry.BL
                 Patronymic = item.Patronymic,
                 Age = item.Age,
                 ChildhoodId = item.ChildhoodNum
-            });
+            }, item.Ind);
         }
-
+        
         public void DeleteItem(int id)
         {
-            children.DeleteItem(id);
+            var obj = (from item in children.GetItems()
+                       where item.Id == id
+                       select item).First();
+            children.DeleteItem(obj);
         }
     }
 }

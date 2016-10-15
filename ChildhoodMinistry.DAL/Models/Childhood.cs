@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChildhoodMinistry.DAL.Models
 {
-    public class Childhood
+    public class Childhood : BaseEntity
     {
         [Key]
         public int Id { get; set; }

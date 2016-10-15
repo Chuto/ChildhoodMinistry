@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using ChildhoodMinistry.DAL.Models;
+using ChildhoodMinistry.DAL.Repository;
 
 namespace ChildhoodMinistry.Dependency
 {
@@ -21,15 +22,19 @@ namespace ChildhoodMinistry.Dependency
         {
             this.container = new UnityContainer();
 
-            container.RegisterType<IChildhoodService, ChildhoodService>(new TransientLifetimeManager());
-            container.RegisterType<IRepository<Childhood>, ChildhoodRepository>(new TransientLifetimeManager());
-
+            container.RegisterType<IChildhoodService, ChildhoodService>(new TransientLifetimeManager()); 
             container.RegisterType<IChildService, ChildService>(new TransientLifetimeManager());
-            container.RegisterType<IRepository<Child>, ChildRepository>(new TransientLifetimeManager());
+            
+            container.RegisterType<IRepository<Child>, GenericRepository<Child>>(new TransientLifetimeManager());
+            container.RegisterType<IRepository<Childhood>, GenericRepository<Childhood>>(new TransientLifetimeManager());
         }
 
         public object GetService(Type serviceType)
         {
+            //if (container.IsRegistered(serviceType))
+            //     container.Resolve(serviceType);
+            //else
+            //    return null;
             try
             {
                 return container.Resolve(serviceType);

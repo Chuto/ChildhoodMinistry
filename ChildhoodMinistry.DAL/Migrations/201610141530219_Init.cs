@@ -3,7 +3,7 @@ namespace ChildhoodMinistry.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -14,6 +14,7 @@ namespace ChildhoodMinistry.DAL.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Number = c.Int(nullable: false),
                         Adress = c.String(),
+                        guid = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -27,6 +28,7 @@ namespace ChildhoodMinistry.DAL.Migrations
                         Patronymic = c.String(),
                         Age = c.Int(nullable: false),
                         ChildhoodId = c.Int(nullable: false),
+                        guid = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             

@@ -1,5 +1,6 @@
 ﻿using ChildhoodMinistry.BL;
 using ChildhoodMinistry.ViewModel;
+using PagedList;
 using System;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,11 @@ namespace ChildhoodMinistry.Web.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Index2(int? page)
+        {
+            return View(service.GetItems().ToPagedList((page ?? 1), 2));
         }
 
         public JsonResult GetAllChildhoods()
@@ -70,7 +76,7 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (!String.IsNullOrEmpty(id))
             {
-                service.DeleteItem(Convert.ToInt32(id));
+                service.DeleteItem(Int32.Parse(id));
                 return Json("Запись успешно удалена");
             }
             else
@@ -78,6 +84,6 @@ namespace ChildhoodMinistry.Web.Controllers
                 return Json("Не удалось удалить запись");
             }
         }
-
     }
+
 }

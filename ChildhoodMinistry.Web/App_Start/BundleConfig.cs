@@ -11,8 +11,7 @@ namespace ChildhoodMinistry.Web.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundle/crudApp").Include(
-                "~/scripts/crudApp/Factory.js",
-                //"~/scripts/crudApp/Module.js",
+                "~/scripts/crudApp/Module.js",
                 "~/scripts/crudApp/Controllers/ChildController.js",
                 "~/scripts/crudApp/Controllers/ChildhoodController.js",
                 "~/scripts/crudApp/Services/ChildService.js",

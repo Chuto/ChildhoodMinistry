@@ -4,8 +4,8 @@
         restrict: 'A',
         scope: {
             children: '=children',
-            childhoodNum: '@childhoodnum',
-            GetChildrenList : '=f'
+            childhoodNum: '@childhoodNum',
+            GetChildrenList : '=getChildrenList'
         },
         templateUrl: '/scripts/crudApp/Directives/Templates/Children.html'
     };
