@@ -1,6 +1,7 @@
 ﻿using ChildhoodMinistry.DAL.Intarface;
 using ChildhoodMinistry.DAL.Models;
 using ChildhoodMinistry.ViewModel;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;

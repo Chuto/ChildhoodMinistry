@@ -14,7 +14,8 @@ namespace ChildhoodMinistry.Web
     {
         protected void Application_Start()
         {
-            DependencyResolver.SetResolver(new ChildhoodResolver());                 
+            //DependencyResolver.SetResolver(new ChildhoodResolver());
+
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 

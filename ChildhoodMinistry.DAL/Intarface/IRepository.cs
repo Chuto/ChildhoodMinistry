@@ -9,7 +9,7 @@ namespace ChildhoodMinistry.DAL.Intarface
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        List<T> GetItems();
+        IQueryable<T> GetItems();
         void InsertItem(T item);
         void UpdateItem(T item, object id);
         void DeleteItem(T item);

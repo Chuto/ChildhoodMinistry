@@ -29,10 +29,10 @@ namespace ChildhoodMinistry.DAL.Repository
             }
         }
 
-        public List<T> GetItems()
+        public IQueryable<T> GetItems()
         {
             return (from items in this.Entities
-                    select items).ToList();
+                    select items);
         }
 
         public T GetById(object id)

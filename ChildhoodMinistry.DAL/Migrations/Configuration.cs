@@ -16,17 +16,19 @@ namespace ChildhoodMinistry.DAL.Migrations
         {
             base.Seed(context);
 
-            //children_data.Add(new Child {  Name = "Петр", Surname = "Зайцев", Patronymic = "Александрович", Age = 8, ChildhoodId = 1 });
-            //children_data.Add(new Child {  Name = "Екатерина", Surname = "Бублик", Patronymic = "Владимировна", Age = 7, ChildhoodId = 1 });
-            //children_data.Add(new Child { Name = "Александр", Surname = "Петросян", Patronymic = "Викторович", Age = 7, ChildhoodId = 2 });
-            //children_data.Add(new Child { Name = "Юля", Surname = "Крутковец", Patronymic = "Эдуардовна", Age = 8, ChildhoodId = 3 });
+            var children_data = context.Set<Child>();
+            var childhoods_data = context.Set<Childhood>();
 
-            //childhoods_data.Add(new Childhood { Number = 1, Adress = "Притыцкого 9" });
-            //childhoods_data.Add(new Childhood { Number = 2, Adress = "Филимонова 101" });
-            //childhoods_data.Add(new Childhood { Number = 3, Adress = "Лещинского 12" });
+            children_data.Add(new Child { guid = Guid.NewGuid().ToString(), Name = "Петр", Surname = "Зайцев", Patronymic = "Александрович", Age = 8, ChildhoodId = 1 });
+            children_data.Add(new Child { guid = Guid.NewGuid().ToString(), Name = "Екатерина", Surname = "Бублик", Patronymic = "Владимировна", Age = 7, ChildhoodId = 1 });
+            children_data.Add(new Child { guid = Guid.NewGuid().ToString(), Name = "Александр", Surname = "Петросян", Patronymic = "Викторович", Age = 7, ChildhoodId = 2 });
+            children_data.Add(new Child { guid = Guid.NewGuid().ToString(), Name = "Юля", Surname = "Крутковец", Patronymic = "Эдуардовна", Age = 8, ChildhoodId = 3 });
+
+            childhoods_data.Add(new Childhood { guid = Guid.NewGuid().ToString(), Number = 1, Adress = "Притыцкого 9" });
+            childhoods_data.Add(new Childhood { guid = Guid.NewGuid().ToString(), Number = 2, Adress = "Филимонова 101" });
+            childhoods_data.Add(new Childhood { guid = Guid.NewGuid().ToString(), Number = 3, Adress = "Лещинского 12" });
 
             context.SaveChanges();
-
         }
     }
 }
