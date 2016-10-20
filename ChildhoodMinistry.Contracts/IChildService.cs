@@ -1,12 +1,12 @@
-﻿using ChildhoodMinistry.Data.Models;
-using PagedList;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PagedList;
+using ChildhoodMinistry.Data.Models;
 
-namespace ChildhoodMinistry.BL
+namespace ChildhoodMinistry.Contracts
 {
     public interface IChildService : ICRUDService<Child>
     {

@@ -1,11 +1,9 @@
-﻿using ChildhoodMinistry.DAL.Intarface;
-using ChildhoodMinistry.Data.Models;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-
-using ChildhoodMinistry.DAL.Repository;
 using PagedList;
+using ChildhoodMinistry.Contracts;
+using ChildhoodMinistry.Data.Models;
 
 namespace ChildhoodMinistry.BL
 {
@@ -48,14 +46,12 @@ namespace ChildhoodMinistry.BL
         public void InsertItem(Child item)
         {
             children.InsertItem(item);
-
             children.SaveChanges();
         }
 
         public void UpdateItem(Child item)
         {
             children.UpdateItem(item, item.Id);
-
             children.SaveChanges();
         }
         
@@ -65,7 +61,6 @@ namespace ChildhoodMinistry.BL
                        where item.Id == id
                        select item).First();
             children.DeleteItem(obj);
-
             children.SaveChanges();
         }
 

@@ -94,18 +94,6 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -220,6 +208,7 @@
     <Compile Include="Controllers\ChildController.cs" />
     <Compile Include="Controllers\ChildhoodController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Dependency\NinjectResolver.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -250,13 +239,17 @@
       <Project>{186c7905-3fae-44a0-880f-ac62ad790f66}</Project>
       <Name>ChildhoodMinistry.BL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ChildhoodMinistry.Contracts\ChildhoodMinistry.Contracts.csproj">
+      <Project>{9debe3c4-b4e8-45f9-97f0-1887979fcf6f}</Project>
+      <Name>ChildhoodMinistry.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChildhoodMinistry.DAL\ChildhoodMinistry.DAL.csproj">
+      <Project>{538c814b-87e3-4b0f-a6cc-42c003f4ed45}</Project>
+      <Name>ChildhoodMinistry.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ChildhoodMinistry.Data\ChildhoodMinistry.Data.csproj">
       <Project>{44bfa2a6-928b-4b94-8b03-a81f8ed28794}</Project>
       <Name>ChildhoodMinistry.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ChildhoodMinistry.Dependency\ChildhoodMinistry.Dependency.csproj">
-      <Project>{7318d103-0ad7-4c43-a3eb-9ec400fe587b}</Project>
-      <Name>ChildhoodMinistry.Dependency</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

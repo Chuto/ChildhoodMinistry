@@ -1,16 +1,16 @@
 ﻿namespace ChildhoodMinistry.DAL
 {
-    using ChildhoodMinistry.Data.Models;
-    using Intarface;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.ModelConfiguration;
     using System.Linq;
     using System.Reflection;
+    using ChildhoodMinistry.Data.Models;
+    using ChildhoodMinistry.Contracts;
 
-    public class ContextDB : DbContext
+    public class ChildhoodMinistryContext : DbContext
     {
-        public ContextDB()
+        public ChildhoodMinistryContext()
             : base("name=ContextDB")
         {
         }
@@ -19,8 +19,6 @@
         {
             return base.Set<TEntity>();
         }
-
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

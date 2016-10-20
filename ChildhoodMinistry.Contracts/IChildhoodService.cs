@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using PagedList;
 using ChildhoodMinistry.Data.Models;
 
-namespace ChildhoodMinistry.BL
+namespace ChildhoodMinistry.Contracts
 {
     public interface IChildhoodService : ICRUDService<Childhood>
     {

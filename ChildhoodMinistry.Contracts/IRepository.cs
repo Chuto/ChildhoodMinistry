@@ -1,11 +1,11 @@
-﻿using ChildhoodMinistry.Data.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ChildhoodMinistry.Data.Models;
 
-namespace ChildhoodMinistry.DAL.Intarface
+namespace ChildhoodMinistry.Contracts
 {
     public interface IRepository<T> where T : BaseEntity
     {

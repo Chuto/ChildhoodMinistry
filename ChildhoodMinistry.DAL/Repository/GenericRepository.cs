@@ -1,18 +1,17 @@
-﻿using ChildhoodMinistry.DAL.Intarface;
-using ChildhoodMinistry.Data.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using ChildhoodMinistry.Contracts;
+using ChildhoodMinistry.Data.Models;
 
 namespace ChildhoodMinistry.DAL.Repository
 {
     public class GenericRepository<T>: IDisposable, IRepository<T> where T : BaseEntity
     {
-        private readonly ContextDB context;
+        private readonly DbContext context;
         private IDbSet<T> entities;
 
-        public GenericRepository(ContextDB context)
+        public GenericRepository(DbContext context)
         {
             this.context = context;
         }
@@ -35,11 +34,6 @@ namespace ChildhoodMinistry.DAL.Repository
                     select items);
         }
 
-        public T GetById(object id)
-        {
-            return this.Entities.Find(id);
-        }
-
         public void InsertItem(T entity)
         {
             this.Entities.Add(entity);
@@ -60,7 +54,6 @@ namespace ChildhoodMinistry.DAL.Repository
         {
             context.SaveChanges();
         }
-
 
         void IDisposable.Dispose()
         {

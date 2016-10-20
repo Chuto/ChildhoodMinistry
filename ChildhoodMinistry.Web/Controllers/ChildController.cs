@@ -1,11 +1,9 @@
-﻿using ChildhoodMinistry.BL;
-using ChildhoodMinistry.Data.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Web;
 using System.Web.Mvc;
+using ChildhoodMinistry.Data.Models;
+using ChildhoodMinistry.Contracts;
 
 namespace ChildhoodMinistry.Web.Controllers
 {
@@ -25,8 +23,7 @@ namespace ChildhoodMinistry.Web.Controllers
 
         public JsonResult GetPage(int? page, int pageSize)
         {
-            var list = service.GetPage(page, pageSize);
-            
+            var list = service.GetPage(page, pageSize);            
             Paging<ChildViewModel> result = new Paging<ChildViewModel>()
             {
                 currentPage = list.PageNumber,
@@ -34,29 +31,9 @@ namespace ChildhoodMinistry.Web.Controllers
                 totalItems = list.TotalItemCount,
                 data = new List<ChildViewModel>()
             };
-
             foreach (var item in list)
             {
                 result.data.Add(new ChildViewModel()
-                {
-                    Name = item.Name,
-                    Surname = item.Surname,
-                    Patronymic = item.Patronymic,
-                    Age = item.Age,
-                    ChildhoodNum = item.ChildhoodId,
-                    Ind = item.Id
-                });
-            }
-
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult GetAllChildren()
-        {
-            var result = new List<ChildViewModel>();
-            foreach (var item in service.GetItems())
-            {
-                result.Add(new ChildViewModel()
                 {
                     Name = item.Name,
                     Surname = item.Surname,
@@ -71,7 +48,7 @@ namespace ChildhoodMinistry.Web.Controllers
 
         public JsonResult GetChildById(int id)
         {
-            var item = service.GetItemById(Convert.ToInt32(id));
+            var item = service.GetItemById(id);
             var result = new ChildViewModel()
             {
                 Name = item.Name,
@@ -123,7 +100,6 @@ namespace ChildhoodMinistry.Web.Controllers
             {
                 return Json(ModelState.Keys.SelectMany(i => ModelState[i].Errors).Select(m => m.ErrorMessage+ Environment.NewLine).ToArray() );
             }
-
         }
 
         [HttpPost]
@@ -155,6 +131,5 @@ namespace ChildhoodMinistry.Web.Controllers
             service.DeleteItem(id);
             return Json("Запись успешно удалена");
         }
-
     }
 }

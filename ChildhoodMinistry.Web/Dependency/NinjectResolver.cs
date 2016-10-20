@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ninject;
 using System.Web.Mvc;
-using ChildhoodMinistry.DAL.Intarface;
+using System.Data.Entity;
+using Ninject;
+using ChildhoodMinistry.Contracts;
 using ChildhoodMinistry.Data.Models;
 using ChildhoodMinistry.DAL.Repository;
+using ChildhoodMinistry.DAL;
 using ChildhoodMinistry.BL;
 
-namespace ChildhoodMinistry.Dependency
+namespace ChildhoodMinistry.Web
 {
     public class NinjectResolver : IDependencyResolver
     {
@@ -36,9 +35,9 @@ namespace ChildhoodMinistry.Dependency
         {
             kernel.Bind<IRepository<Child>>().To<GenericRepository<Child>>().InSingletonScope();
             kernel.Bind<IRepository<Childhood>>().To<GenericRepository<Childhood>>().InSingletonScope();
-
             kernel.Bind<IChildService>().To<ChildService>().InTransientScope();
             kernel.Bind<IChildhoodService>().To<ChildhoodService>().InTransientScope();
+            kernel.Bind<DbContext>().To<ChildhoodMinistryContext>().InSingletonScope();
         }
     }
 }

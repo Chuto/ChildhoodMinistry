@@ -25,7 +25,7 @@
             </tr>
         </table>
 
-            <div class="container">
+            <div class="container" ng-cloak="true">
                 <ul ng-if="pager.pages.length" class="pagination">
                     <li ng-class="{disabled:pager.currentPage === 1}">
                         <a ng-click="setPage(1)">First</a>
@@ -82,8 +82,7 @@
 
     <div ng-show="divList" ng-cloak>
         <h2>Список детей</h2>
-            <div dir-list-items typeof="list" children="children" childhood-num="{{childhoodNum}}" get-children-list="GetChildrenList"></div>
-
+        <div dir-list-items typeof="list" children="children" childhood-num="{{childhoodNum}}" get-children-list="GetChildrenList"></div>
         <input type="button" ng-click="CancelChildrenList()" class="btn btn-danger" value="Закрыть" />
     </div>
 </div>

@@ -1,9 +1,9 @@
-﻿using ChildhoodMinistry.DAL.Intarface;
-using ChildhoodMinistry.Data.Models;
-using PagedList;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PagedList;
+using ChildhoodMinistry.Contracts;
+using ChildhoodMinistry.Data.Models;
 
 namespace ChildhoodMinistry.BL
 {

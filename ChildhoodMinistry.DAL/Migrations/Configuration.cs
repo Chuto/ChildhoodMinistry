@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity.Migrations;
 using ChildhoodMinistry.Data.Models;
-using System.Data.Entity;
 
 namespace ChildhoodMinistry.DAL.Migrations
 {
     internal sealed class Configuration :
-        DbMigrationsConfiguration<ContextDB>
+        DbMigrationsConfiguration<ChildhoodMinistryContext>
     {
-        protected override void Seed(ContextDB context)
+        protected override void Seed(ChildhoodMinistryContext context)
         {
             base.Seed(context);
 
