@@ -10,14 +10,7 @@ namespace ChildhoodMinistry.Web.App_Start
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundle/crudApp").Include(
-                "~/scripts/crudApp/Module.js",
-                "~/scripts/crudApp/Controllers/ChildController.js",
-                "~/scripts/crudApp/Controllers/ChildhoodController.js",
-                "~/scripts/crudApp/Services/ChildService.js",
-                "~/scripts/crudApp/Services/ChildhoodService.js",
-                "~/scripts/crudApp/Directives/Directive.js"
-                ));
+            bundles.Add(new ScriptBundle("~/bundle/crudApp/crud.js").IncludeDirectory("~/scripts/crudApp/", "*.js", searchSubdirectories: true)); 
         }
     }
 }

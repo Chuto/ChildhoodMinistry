@@ -1,6 +1,5 @@
 ﻿using ChildhoodMinistry.DAL.Intarface;
-using ChildhoodMinistry.DAL.Models;
-using ChildhoodMinistry.ViewModel;
+using ChildhoodMinistry.Data.Models;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -14,36 +13,24 @@ namespace ChildhoodMinistry.BL
 
         public ChildhoodService(IRepository<Childhood> childhoods)
         {
-            this.childhoods = childhoods;
+            this.childhoods = childhoods;            
         }
 
-        public List<ChildhoodViewModel> GetItems()
+        public List<Childhood> GetItems()
         {
-            var result = new List<ChildhoodViewModel>();
+            var result = new List<Childhood>();
             foreach (Childhood obj in childhoods.GetItems())
             {
-                result.Add(new ChildhoodViewModel()
-                {                    
-                    Ind = obj.Id,
-                    Number = obj.Number,
-                    Adress = obj.Adress
-                });
+                result.Add(obj);
             }
             return result;
         }
 
-        public ChildhoodViewModel GetItemById(int id)
+        public Childhood GetItemById(int id)
         {
-            var obj = (from item in childhoods.GetItems()
-                      where item.Id == id
-                      select item).First();
- 
-            return new ChildhoodViewModel()
-            {
-                Ind = obj.Id,
-                Number = obj.Number,
-                Adress = obj.Adress,
-            };
+            return (from item in childhoods.GetItems()
+                    where item.Id == id
+                    select item).First();
         }
 
         public List<int> GetChildhoodNum()
@@ -52,25 +39,16 @@ namespace ChildhoodMinistry.BL
                     select nums.Number).ToList();
         }
 
-        public void InsertItem(ChildhoodViewModel item)
+        public void InsertItem(Childhood item)
         {
-            childhoods.InsertItem(new Childhood()
-            {
-                Id = item.Ind,
-                guid = Guid.NewGuid().ToString(),
-                Number = item.Number,
-                Adress = item.Adress
-            });
+            childhoods.InsertItem(item);
+            childhoods.SaveChanges();
         }
 
-        public void UpdateItem(ChildhoodViewModel item)
+        public void UpdateItem(Childhood item)
         {
-            childhoods.UpdateItem(new Childhood()
-            {
-                Id = item.Ind,
-                Number = item.Number,
-                Adress = item.Adress
-            }, item.Ind);
+            childhoods.UpdateItem(item, item.Id);
+            childhoods.SaveChanges();
         }
 
         public void DeleteItem(int id)
@@ -79,6 +57,12 @@ namespace ChildhoodMinistry.BL
                        where item.Id == id
                        select item).First();
             childhoods.DeleteItem(obj);
+            childhoods.SaveChanges();
+        }
+
+        public IPagedList<Childhood> GetPage(int? pageNum, int pageSize)
+        {
+            return childhoods.GetItems().OrderBy(x => x.Number).ToPagedList<Childhood>((pageNum ?? 1), pageSize);
         }
     }
 }

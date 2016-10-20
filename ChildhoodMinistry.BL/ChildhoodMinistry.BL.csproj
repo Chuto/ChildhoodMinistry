@@ -57,9 +57,9 @@
       <Project>{538c814b-87e3-4b0f-a6cc-42c003f4ed45}</Project>
       <Name>ChildhoodMinistry.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ChildhoodMinistry.ViewModel\ChildhoodMinistry.ViewModel.csproj">
-      <Project>{a5369ef5-1f00-4e94-b615-9ebb9a5a955f}</Project>
-      <Name>ChildhoodMinistry.ViewModel</Name>
+    <ProjectReference Include="..\ChildhoodMinistry.Data\ChildhoodMinistry.Data.csproj">
+      <Project>{44bfa2a6-928b-4b94-8b03-a81f8ed28794}</Project>
+      <Name>ChildhoodMinistry.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

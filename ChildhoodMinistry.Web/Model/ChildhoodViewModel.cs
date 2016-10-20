@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace ChildhoodMinistry.ViewModel
+namespace ChildhoodMinistry.Web
 {
     public class ChildhoodViewModel
     {
@@ -15,6 +15,6 @@ namespace ChildhoodMinistry.ViewModel
         public int Number { get; set; }
         [Required(AllowEmptyStrings = false)]
         [RegularExpression(@"\D{2,}\s\d+",ErrorMessage = "Адрес: <название кириллицей> <номер>")]
-        public string Adress { get; set; }        
+        public string Adress { get; set; }
     }
 }

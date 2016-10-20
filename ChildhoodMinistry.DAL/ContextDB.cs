@@ -1,7 +1,7 @@
 ﻿namespace ChildhoodMinistry.DAL
 {
+    using ChildhoodMinistry.Data.Models;
     using Intarface;
-    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.ModelConfiguration;
@@ -10,7 +10,6 @@
 
     public class ContextDB : DbContext
     {
-
         public ContextDB()
             : base("name=ContextDB")
         {
@@ -20,6 +19,8 @@
         {
             return base.Set<TEntity>();
         }
+
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -33,12 +34,6 @@
                 modelBuilder.Configurations.Add(configurationInstance);
             }
             base.OnModelCreating(modelBuilder);
-        }
-
-        public void save()
-        {
-            this.SaveChanges();
-        }
+        }        
     }
-
 }

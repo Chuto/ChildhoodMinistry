@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace ChildhoodMinistry.ViewModel
+namespace ChildhoodMinistry.Web
 {
     public class ChildViewModel
     {

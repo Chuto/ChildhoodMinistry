@@ -1,11 +1,11 @@
 ﻿using ChildhoodMinistry.DAL.Intarface;
-using ChildhoodMinistry.DAL.Models;
-using ChildhoodMinistry.ViewModel;
+using ChildhoodMinistry.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System;
 
 using ChildhoodMinistry.DAL.Repository;
+using PagedList;
 
 namespace ChildhoodMinistry.BL
 {
@@ -18,82 +18,45 @@ namespace ChildhoodMinistry.BL
             this.children = children;
         }
 
-        public List<ChildViewModel> GetItems()
+        public List<Child> GetItems()
         {
-            var result = new List<ChildViewModel>();
+            var result = new List<Child>();
             foreach (var obj in children.GetItems())
             {
-                result.Add(new ChildViewModel() {
-                    Ind = obj.Id,
-                    Name = obj.Name,
-                    Surname = obj.Surname,
-                    Patronymic = obj.Patronymic,
-                    Age = obj.Age,
-                    ChildhoodNum = obj.ChildhoodId                    
-                });
+                result.Add(obj);
             }         
             return result;
         }
 
-        public ChildViewModel GetItemById(int id)
+        public Child GetItemById(int id)
         {
-            var obj = (from item in children.GetItems()
-                       where item.Id == id
-                       select item).First();
-
-            return new ChildViewModel()
-            {
-                Ind = obj.Id,
-                Name = obj.Name,
-                Surname = obj.Surname,
-                Patronymic = obj.Patronymic,
-                Age = obj.Age,
-                ChildhoodNum = obj.ChildhoodId
-            };
+            return (from item in children.GetItems()
+                    where item.Id == id
+                    select item).First();
         }
 
-        public List<ChildViewModel> GetChildByChildhoodId(int id)
+        public List<Child> GetChildByChildhoodId(int id)
         {
-            var result = new List<ChildViewModel>();
+            var result = new List<Child>();
             foreach (var obj in children.GetItems().Where(s => s.ChildhoodId == id))
             {
-                result.Add(new ChildViewModel()
-                {
-                    Ind = obj.Id,
-                    Name = obj.Name,
-                    Surname = obj.Surname,
-                    Patronymic = obj.Patronymic,
-                    Age = obj.Age,
-                    ChildhoodNum = obj.ChildhoodId
-                });
+                result.Add(obj);
             }
             return result;
         }
 
-        public void InsertItem(ChildViewModel item)
+        public void InsertItem(Child item)
         {
-            children.InsertItem(new Child() {
-                Id = item.Ind,
-                guid = Guid.NewGuid().ToString(),
-                Name = item.Name,
-                Surname = item.Surname,
-                Patronymic = item.Patronymic,
-                Age = item.Age,
-                ChildhoodId = item.ChildhoodNum
-            });
+            children.InsertItem(item);
+
+            children.SaveChanges();
         }
 
-        public void UpdateItem(ChildViewModel item)
+        public void UpdateItem(Child item)
         {
-            children.UpdateItem(new Child()
-            {
-                Id = item.Ind,
-                Name = item.Name,
-                Surname = item.Surname,
-                Patronymic = item.Patronymic,
-                Age = item.Age,
-                ChildhoodId = item.ChildhoodNum
-            }, item.Ind);
+            children.UpdateItem(item, item.Id);
+
+            children.SaveChanges();
         }
         
         public void DeleteItem(int id)
@@ -102,6 +65,13 @@ namespace ChildhoodMinistry.BL
                        where item.Id == id
                        select item).First();
             children.DeleteItem(obj);
+
+            children.SaveChanges();
+        }
+
+        public IPagedList<Child> GetPage(int? pageNum, int pageSize)
+        {
+            return children.GetItems().OrderBy(x => x.Surname).ToPagedList<Child>((pageNum ?? 1), pageSize);
         }
     }
 }

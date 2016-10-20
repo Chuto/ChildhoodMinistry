@@ -1,5 +1,5 @@
 ﻿using ChildhoodMinistry.BL;
-using ChildhoodMinistry.ViewModel;
+using ChildhoodMinistry.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,19 +23,83 @@ namespace ChildhoodMinistry.Web.Controllers
             return View();
         }
 
+        public JsonResult GetPage(int? page, int pageSize)
+        {
+            var list = service.GetPage(page, pageSize);
+            
+            Paging<ChildViewModel> result = new Paging<ChildViewModel>()
+            {
+                currentPage = list.PageNumber,
+                pageSize = list.PageSize,
+                totalItems = list.TotalItemCount,
+                data = new List<ChildViewModel>()
+            };
+
+            foreach (var item in list)
+            {
+                result.data.Add(new ChildViewModel()
+                {
+                    Name = item.Name,
+                    Surname = item.Surname,
+                    Patronymic = item.Patronymic,
+                    Age = item.Age,
+                    ChildhoodNum = item.ChildhoodId,
+                    Ind = item.Id
+                });
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetAllChildren()
         {
-            return Json(service.GetItems(), JsonRequestBehavior.AllowGet);
+            var result = new List<ChildViewModel>();
+            foreach (var item in service.GetItems())
+            {
+                result.Add(new ChildViewModel()
+                {
+                    Name = item.Name,
+                    Surname = item.Surname,
+                    Patronymic = item.Patronymic,
+                    Age = item.Age,
+                    ChildhoodNum = item.ChildhoodId,
+                    Ind = item.Id
+                });
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetChildById(string id)
+        public JsonResult GetChildById(int id)
         {
-            return Json(service.GetItemById(Convert.ToInt32(id)), JsonRequestBehavior.AllowGet);
+            var item = service.GetItemById(Convert.ToInt32(id));
+            var result = new ChildViewModel()
+            {
+                Name = item.Name,
+                Surname = item.Surname,
+                Patronymic = item.Patronymic,
+                Age = item.Age,
+                ChildhoodNum = item.ChildhoodId,
+                Ind = item.Id
+            };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetChildByChildhoodId(string id)
+        public JsonResult GetChildByChildhoodId(int id)
         {
-            return Json(service.GetChildByChildhoodId(Convert.ToInt32(id)), JsonRequestBehavior.AllowGet);
+            var result = new List<ChildViewModel>();
+            foreach (var item in service.GetChildByChildhoodId(id))
+            {
+                result.Add(new ChildViewModel()
+                {
+                    Name = item.Name,
+                    Surname = item.Surname,
+                    Patronymic = item.Patronymic,
+                    Age = item.Age,
+                    ChildhoodNum = item.ChildhoodId,
+                    Ind = item.Id
+                });
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -43,7 +107,16 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (child != null && ModelState.IsValid)
             {
-                service.UpdateItem(child);
+                var item = new Child()
+                {
+                    Name = child.Name,
+                    Surname = child.Surname,
+                    Patronymic = child.Patronymic,
+                    Age = child.Age,
+                    ChildhoodId = child.ChildhoodNum,
+                    Id = child.Ind
+                };
+                service.UpdateItem(item);
                 return Json("Изменения успешно сохранены");
             }
             else
@@ -58,7 +131,16 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (child != null && ModelState.IsValid)
             {
-                service.InsertItem(child);
+                var item = new Child()
+                {
+                    Name = child.Name,
+                    Surname = child.Surname,
+                    Patronymic = child.Patronymic,
+                    Age = child.Age,
+                    ChildhoodId = child.ChildhoodNum,
+                    Id = child.Ind
+                };
+                service.InsertItem(item);
                 return Json("Данные успешно добавлены");
             }
             else
@@ -68,17 +150,10 @@ namespace ChildhoodMinistry.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult DeleteChild(string id)
+        public JsonResult DeleteChild(int id)
         {
-            if (!String.IsNullOrEmpty(id))
-            {
-                service.DeleteItem(Int32.Parse(id));
-                return Json("Запись успешно удалена");
-            }
-            else
-            {
-                return Json("Не удалось удалить запись");
-            }
+            service.DeleteItem(id);
+            return Json("Запись успешно удалена");
         }
 
     }

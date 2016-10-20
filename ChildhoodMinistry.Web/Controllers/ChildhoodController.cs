@@ -1,7 +1,8 @@
 ﻿using ChildhoodMinistry.BL;
-using ChildhoodMinistry.ViewModel;
+using ChildhoodMinistry.Data.Models;
 using PagedList;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
@@ -18,23 +19,60 @@ namespace ChildhoodMinistry.Web.Controllers
         }
 
         public ActionResult Index()
-        {
+        { 
             return View();
         }
 
-        public ActionResult Index2(int? page)
+        public JsonResult GetPage(int? page, int pageSize)
         {
-            return View(service.GetItems().ToPagedList((page ?? 1), 2));
+            var list = service.GetPage(page, pageSize);
+            
+            Paging<ChildhoodViewModel> result = new Paging<ChildhoodViewModel>()
+            {
+                currentPage = list.PageNumber,
+                pageSize = list.PageSize,
+                totalItems = list.TotalItemCount,
+                data = new List<ChildhoodViewModel>()
+            };
+
+            foreach (var item in list)
+            {
+                result.data.Add(new ChildhoodViewModel()
+                {
+                    Ind = item.Id,
+                    Number = item.Number,
+                    Adress = item.Adress
+                });
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetAllChildhoods()
         {
-            return Json(service.GetItems(), JsonRequestBehavior.AllowGet);
+            var items = new List<ChildhoodViewModel>();
+            foreach (var item in service.GetItems())
+            {
+                items.Add(new ChildhoodViewModel()
+                {
+                    Ind = item.Id,
+                    Number = item.Number,
+                    Adress = item.Adress
+                });
+            }
+            return Json(items, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetChildhoodById(string id)
+        public JsonResult GetChildhoodById(int id)
         {
-            return Json(service.GetItemById(Convert.ToInt32(id)), JsonRequestBehavior.AllowGet);
+            var item = service.GetItemById(id);
+            var result = new ChildhoodViewModel()
+            {
+                Ind = item.Id,
+                Number = item.Number,
+                Adress = item.Adress
+            };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetChildhoodNum()
@@ -47,7 +85,13 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (childhood != null && ModelState.IsValid)
             {
-                service.UpdateItem(childhood);
+                var item = new Childhood()
+                {
+                    Id = childhood.Ind,
+                    Number = childhood.Number,
+                    Adress = childhood.Adress
+                };
+                service.UpdateItem(item);
                 return Json("Изменения успешно сохранены");
             }
             else
@@ -62,7 +106,13 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (childhood != null && ModelState.IsValid)
             {
-                service.InsertItem(childhood);
+                var item = new Childhood()
+                {
+                    Id = childhood.Ind,
+                    Number = childhood.Number,
+                    Adress = childhood.Adress
+                };
+                service.InsertItem(item);
                 return Json("Данные успешно добавлены");
             }
             else
@@ -72,17 +122,10 @@ namespace ChildhoodMinistry.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult DeleteChildhood(string id)
-        {
-            if (!String.IsNullOrEmpty(id))
-            {
-                service.DeleteItem(Int32.Parse(id));
-                return Json("Запись успешно удалена");
-            }
-            else
-            {
-                return Json("Не удалось удалить запись");
-            }
+        public JsonResult DeleteChildhood(int id)
+        {  
+            service.DeleteItem(id);
+            return Json("Запись успешно удалена");
         }
     }
 

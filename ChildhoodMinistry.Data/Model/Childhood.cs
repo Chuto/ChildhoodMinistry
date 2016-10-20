@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChildhoodMinistry.DAL.Models
+namespace ChildhoodMinistry.Data.Models
 {
     public class Childhood : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
+        //[Key]
+        //public int Id { get; set; }
         public int Number { get; set; }
         public string Adress { get; set; }
     }

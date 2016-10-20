@@ -1,4 +1,4 @@
-﻿using ChildhoodMinistry.DAL.Models;
+﻿using ChildhoodMinistry.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +13,6 @@ namespace ChildhoodMinistry.DAL.Intarface
         void InsertItem(T item);
         void UpdateItem(T item, object id);
         void DeleteItem(T item);
+        void SaveChanges();
     }
 }

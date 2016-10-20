@@ -1,4 +1,4 @@
-﻿using ChildhoodMinistry.DAL.Models;
+﻿using ChildhoodMinistry.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +14,6 @@ namespace ChildhoodMinistry.DAL.Mapping
         public ChildhoodMap()
         {
             HasKey(t => t.Id);
-            Property(t => t.guid).IsOptional();
             Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Adress).IsRequired();
             Property(t => t.Number).IsRequired();

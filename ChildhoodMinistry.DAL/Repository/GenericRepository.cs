@@ -1,5 +1,5 @@
 ﻿using ChildhoodMinistry.DAL.Intarface;
-using ChildhoodMinistry.DAL.Models;
+using ChildhoodMinistry.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -43,25 +43,23 @@ namespace ChildhoodMinistry.DAL.Repository
         public void InsertItem(T entity)
         {
             this.Entities.Add(entity);
-
-            this.context.SaveChanges();
         }
 
         public void UpdateItem(T entity, object id)
         {
             Entities.Remove(Entities.Find(id));
             Entities.Add(entity);
-
-            this.context.SaveChanges();
         }
 
         public void DeleteItem(T entity)
         {
             Entities.Remove(entity);
-
-            this.context.SaveChanges();
         }
 
+        public void SaveChanges()
+        {
+            context.SaveChanges();
+        }
 
 
         void IDisposable.Dispose()

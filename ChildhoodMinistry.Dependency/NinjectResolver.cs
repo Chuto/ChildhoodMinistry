@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Ninject;
 using System.Web.Mvc;
 using ChildhoodMinistry.DAL.Intarface;
-using ChildhoodMinistry.DAL.Models;
+using ChildhoodMinistry.Data.Models;
 using ChildhoodMinistry.DAL.Repository;
 using ChildhoodMinistry.BL;
 

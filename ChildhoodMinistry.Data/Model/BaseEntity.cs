@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChildhoodMinistry.DAL.Models
+namespace ChildhoodMinistry.Data.Models
 {
     abstract public class BaseEntity
     {
-        public string guid { get; set; }
+        [Key]
+        public int Id { get; set; }
     }
 }
