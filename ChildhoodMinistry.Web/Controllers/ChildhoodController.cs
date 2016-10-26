@@ -1,19 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using ChildhoodMinistry.Data.Models;
 using ChildhoodMinistry.Contracts;
+using ChildhoodMinistry.Data.Model;
+using ChildhoodMinistry.Web.Model;
+using ChildhoodMinistry.Web.Builders;
 
 namespace ChildhoodMinistry.Web.Controllers
 {
     public class ChildhoodController : Controller
     {
-        IChildhoodService service;
+        readonly IChildhoodService _service;
+        private readonly ICrudService<Childhood> _crudService;
+        private readonly IModelBuilder<ChildhoodViewModel, Childhood> _builder;
+        readonly PageBuilder<ChildhoodViewModel> _pageBuilder = new PageBuilder<ChildhoodViewModel>();
 
-        public ChildhoodController(IChildhoodService s)
+        public ChildhoodController(IChildhoodService service, ICrudService<Childhood> crudService, IModelBuilder<ChildhoodViewModel, Childhood> builder)
         {
-            this.service = s;
+            _service = service;
+            _crudService = crudService;
+            _builder = builder;
         }
 
         public ActionResult Index()
@@ -23,41 +29,19 @@ namespace ChildhoodMinistry.Web.Controllers
 
         public JsonResult GetPage(int? page, int pageSize)
         {
-            var list = service.GetPage(page, pageSize);            
-            Paging<ChildhoodViewModel> result = new Paging<ChildhoodViewModel>()
-            {
-                currentPage = list.PageNumber,
-                pageSize = list.PageSize,
-                totalItems = list.TotalItemCount,
-                data = new List<ChildhoodViewModel>()
-            };
-            foreach (var item in list)
-            {
-                result.data.Add(new ChildhoodViewModel()
-                {
-                    Ind = item.Id,
-                    Number = item.Number,
-                    Adress = item.Adress
-                });
-            }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            var list = _service.GetPage(page, pageSize);
+            return Json(_pageBuilder.BuildPage(list, list.Select(item => _builder.EntityToModel(item)).ToList()), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetChildhoodById(int id)
         {
-            var item = service.GetItemById(id);
-            var result = new ChildhoodViewModel()
-            {
-                Ind = item.Id,
-                Number = item.Number,
-                Adress = item.Adress
-            };
-            return Json(result, JsonRequestBehavior.AllowGet);
+            var item = _crudService.GetItemById(id);
+            return Json(_builder.EntityToModel(item), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetChildhoodNum()
         {
-            return Json(service.GetChildhoodNum(), JsonRequestBehavior.AllowGet);
+            return Json(_service.GetChildhoodNum(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -65,13 +49,7 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (childhood != null && ModelState.IsValid)
             {
-                var item = new Childhood()
-                {
-                    Id = childhood.Ind,
-                    Number = childhood.Number,
-                    Adress = childhood.Adress
-                };
-                service.UpdateItem(item);
+                _crudService.UpdateItem(_builder.ModelToEntiy(childhood));
                 return Json("Изменения успешно сохранены");
             }
             else
@@ -85,13 +63,7 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (childhood != null && ModelState.IsValid)
             {
-                var item = new Childhood()
-                {
-                    Id = childhood.Ind,
-                    Number = childhood.Number,
-                    Adress = childhood.Adress
-                };
-                service.InsertItem(item);
+                _crudService.InsertItem(_builder.ModelToEntiy(childhood));
                 return Json("Данные успешно добавлены");
             }
             else
@@ -103,7 +75,7 @@ namespace ChildhoodMinistry.Web.Controllers
         [HttpPost]
         public JsonResult DeleteChildhood(int id)
         {  
-            service.DeleteItem(id);
+            _crudService.DeleteItem(id);
             return Json("Запись успешно удалена");
         }
     }

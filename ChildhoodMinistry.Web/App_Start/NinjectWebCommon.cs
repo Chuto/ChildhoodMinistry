@@ -1,30 +1,43 @@
-﻿[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(ChildhoodMinistry.Web.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(ChildhoodMinistry.Web.App_Start.NinjectWebCommon), "Stop")]
-namespace ChildhoodMinistry.Web.App_Start
-{     
-    using System; 
-    using System.Web;   
-    using System.Web.Mvc;
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-    using Ninject;
-    using Ninject.Web.Common;
+using System;
+using System.Web;
+using System.Web.Mvc;
+using ChildhoodMinistry.Web;
+using ChildhoodMinistry.Web.Dependency;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Ninject;
+using Ninject.Web.Common;
 
-    public static class NinjectWebCommon
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
+
+namespace ChildhoodMinistry.Web
+{
+    public static class NinjectWebCommon 
     {
-        private static readonly Bootstrapper bootstrapper = new Bootstrapper();
+        private static readonly Bootstrapper Bootstrapper = new Bootstrapper();
 
-        public static void Start()
+        /// <summary>
+        /// Starts the application
+        /// </summary>
+        public static void Start() 
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
-            bootstrapper.Initialize(CreateKernel);
+            Bootstrapper.Initialize(CreateKernel);
         }
-
+        
+        /// <summary>
+        /// Stops the application.
+        /// </summary>
         public static void Stop()
         {
-            bootstrapper.ShutDown();
+            Bootstrapper.ShutDown();
         }
-
+        
+        /// <summary>
+        /// Creates the kernel that will manage your application.
+        /// </summary>
+        /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
@@ -43,9 +56,13 @@ namespace ChildhoodMinistry.Web.App_Start
             }
         }
 
+        /// <summary>
+        /// Load your modules or register your services here!
+        /// </summary>
+        /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
             DependencyResolver.SetResolver(new NinjectResolver(kernel));
-        }
+        }        
     }
 }

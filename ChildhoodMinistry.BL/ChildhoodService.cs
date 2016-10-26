@@ -1,68 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using PagedList;
 using ChildhoodMinistry.Contracts;
-using ChildhoodMinistry.Data.Models;
+using ChildhoodMinistry.Data.Model;
 
 namespace ChildhoodMinistry.BL
 {
     public class ChildhoodService : IChildhoodService
     {
-        private IRepository<Childhood> childhoods;
+        private readonly IRepository<Childhood> _childhoods;
 
         public ChildhoodService(IRepository<Childhood> childhoods)
         {
-            this.childhoods = childhoods;            
-        }
-
-        public List<Childhood> GetItems()
-        {
-            var result = new List<Childhood>();
-            foreach (Childhood obj in childhoods.GetItems())
-            {
-                result.Add(obj);
-            }
-            return result;
-        }
-
-        public Childhood GetItemById(int id)
-        {
-            return (from item in childhoods.GetItems()
-                    where item.Id == id
-                    select item).First();
+            _childhoods = childhoods;            
         }
 
         public List<int> GetChildhoodNum()
         {
-            return (from nums in childhoods.GetItems()
+            return (from nums in _childhoods.GetItems()
+                    orderby nums.Number
                     select nums.Number).ToList();
-        }
-
-        public void InsertItem(Childhood item)
-        {
-            childhoods.InsertItem(item);
-            childhoods.SaveChanges();
-        }
-
-        public void UpdateItem(Childhood item)
-        {
-            childhoods.UpdateItem(item, item.Id);
-            childhoods.SaveChanges();
-        }
-
-        public void DeleteItem(int id)
-        {
-            var obj = (from item in childhoods.GetItems()
-                       where item.Id == id
-                       select item).First();
-            childhoods.DeleteItem(obj);
-            childhoods.SaveChanges();
         }
 
         public IPagedList<Childhood> GetPage(int? pageNum, int pageSize)
         {
-            return childhoods.GetItems().OrderBy(x => x.Number).ToPagedList<Childhood>((pageNum ?? 1), pageSize);
+            return _childhoods.GetItems().OrderBy(x => x.Number).ToPagedList((pageNum ?? 1), pageSize);
         }
     }
 }

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using ChildhoodMinistry.Data.Model;
 using PagedList;
-using ChildhoodMinistry.Data.Models;
 
 namespace ChildhoodMinistry.Contracts
 {
-    public interface IChildService : ICRUDService<Child>
+    public interface IChildService
     {
         List<Child> GetChildByChildhoodId(int id);
         IPagedList<Child> GetPage(int? pageNum, int pageSize);

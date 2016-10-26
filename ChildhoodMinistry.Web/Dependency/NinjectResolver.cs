@@ -1,43 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Mvc;
 using System.Data.Entity;
-using Ninject;
+using System.Web.Mvc;
 using ChildhoodMinistry.Contracts;
-using ChildhoodMinistry.Data.Models;
-using ChildhoodMinistry.DAL.Repository;
 using ChildhoodMinistry.DAL;
-using ChildhoodMinistry.BL;
+using Ninject;
+using Ninject.Extensions.Conventions;
+using Ninject.Web.Common;
 
-namespace ChildhoodMinistry.Web
+namespace ChildhoodMinistry.Web.Dependency
 {
     public class NinjectResolver : IDependencyResolver
     {
-        private IKernel kernel;
+        private readonly IKernel _kernel;
 
         public NinjectResolver(IKernel kernelParam)
         {
-            kernel = kernelParam;
+            _kernel = kernelParam;
             AddBindings();
         }
 
         public object GetService(Type serviceType)
         {
-            return kernel.TryGet(serviceType);
+            return _kernel.TryGet(serviceType);
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            return kernel.GetAll(serviceType);
+            return _kernel.GetAll(serviceType);
         }
 
         private void AddBindings()
         {
-            kernel.Bind<IRepository<Child>>().To<GenericRepository<Child>>().InSingletonScope();
-            kernel.Bind<IRepository<Childhood>>().To<GenericRepository<Childhood>>().InSingletonScope();
-            kernel.Bind<IChildService>().To<ChildService>().InTransientScope();
-            kernel.Bind<IChildhoodService>().To<ChildhoodService>().InTransientScope();
-            kernel.Bind<DbContext>().To<ChildhoodMinistryContext>().InSingletonScope();
+            _kernel.Bind(convention => convention
+                .FromAssembliesMatching("ChildhoodMinistry.*")
+                .SelectAllClasses()
+                .InheritedFrom(typeof(IRepository<>))
+                .BindSingleInterface()
+                .Configure(obj => obj.InTransientScope())
+            );
+
+            _kernel.Bind(convention => convention
+                .FromAssembliesMatching("ChildhoodMinistry.*")
+                .SelectAllClasses()
+                .InheritedFrom(typeof(ICrudService<>))
+                .BindSingleInterface()
+                .Configure(obj => obj.InTransientScope())
+            );
+
+            _kernel.Bind(convention => convention
+                .FromAssembliesMatching("ChildhoodMinistry.*")
+                .SelectAllClasses()
+                .InheritedFrom(typeof(IModelBuilder<,>))
+                .BindSingleInterface()
+                .Configure(obj => obj.InTransientScope())
+            );
+
+            _kernel.Bind(convention => convention
+                .FromAssembliesMatching("ChildhoodMinistry.*")
+                .SelectAllClasses()
+                .Where(t => t.Name.EndsWith("Service"))
+                .BindDefaultInterface()
+                .Configure(obj => obj.InTransientScope())
+            );
+
+            _kernel.Bind<DbContext>().To<ChildhoodMinistryContext>().InRequestScope();
         }
     }
 }

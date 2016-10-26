@@ -1,42 +1,38 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using ChildhoodMinistry.Contracts;
-using ChildhoodMinistry.Data.Models;
+using ChildhoodMinistry.Data.Model;
 
 namespace ChildhoodMinistry.DAL.Repository
 {
-    public class GenericRepository<T>: IDisposable, IRepository<T> where T : BaseEntity
+    public class GenericRepository<T>: IRepository<T> where T : BaseEntity
     {
-        private readonly DbContext context;
-        private IDbSet<T> entities;
+        private readonly DbContext _context;
+        private IDbSet<T> _entities;
 
         public GenericRepository(DbContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         private IDbSet<T> Entities
         {
-            get
-            {
-                if (entities == null)
-                {
-                    entities = context.Set<T>();
-                }
-                return entities;
-            }
+            get { return _entities ?? (_entities = _context.Set<T>()); }
         }
 
         public IQueryable<T> GetItems()
         {
-            return (from items in this.Entities
-                    select items);
+            return Entities;
+        }
+
+        public T GetItemById(int id)
+        {
+            return Entities.Find(id);
         }
 
         public void InsertItem(T entity)
         {
-            this.Entities.Add(entity);
+            Entities.Add(entity);
         }
 
         public void UpdateItem(T entity, object id)
@@ -45,20 +41,14 @@ namespace ChildhoodMinistry.DAL.Repository
             Entities.Add(entity);
         }
 
-        public void DeleteItem(T entity)
+        public void DeleteItem(int id)
         {
-            Entities.Remove(entity);
+            Entities.Remove(Entities.Find(id));
         }
 
         public void SaveChanges()
         {
-            context.SaveChanges();
-        }
-
-        void IDisposable.Dispose()
-        {
-            if (context!=null)
-                 context.Dispose();
+            _context.SaveChanges();
         }
     }
 }

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ChildhoodMinistry.Data.Models;
+﻿using System.Linq;
+using ChildhoodMinistry.Data.Model;
 
 namespace ChildhoodMinistry.Contracts
 {
     public interface IRepository<T> where T : BaseEntity
     {
         IQueryable<T> GetItems();
+        T GetItemById(int id);
         void InsertItem(T item);
         void UpdateItem(T item, object id);
-        void DeleteItem(T item);
+        void DeleteItem(int id);
         void SaveChanges();
     }
 }

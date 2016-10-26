@@ -5,17 +5,18 @@
         if (page < 1 || page > $scope.pager.totalPages) {
             return;
         }
-        currentPage = page || 1;
-        pageSize = 2;
+        var currentPage = page || 1;
+        var pageSize = 2;
         $scope.edit = false;
         $scope.save = false;
+        $scope.divEdit = false;
         var getData = crudService.sendRequest("post", "/Child/GetPage", { page: currentPage, pageSize: pageSize });
         getData.then(function (respon) {
-            $scope.children = respon.data.data;
-            currentPage = respon.data.currentPage;
-            pageSize = respon.data.pageSize;
-            totalItems = respon.data.totalItems;
-            totalPages = respon.data.totalPages;
+            $scope.children = respon.data.Data;
+            currentPage = respon.data.Page.CurrentPage;
+            pageSize = respon.data.Page.PageSize;
+            var totalItems = respon.data.Page.TotalItems;
+            var totalPages = respon.data.Page.TotalPages;
 
             var startPage, endPage;
 
@@ -37,7 +38,7 @@
 
             var startIndex = (currentPage - 1) * pageSize;
             var endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
-            var pages = _.range(startPage, endPage + 1);
+            var pages = window._.range(startPage, endPage + 1);
 
             $scope.pager = {
                 totalItems: totalItems,
@@ -58,13 +59,22 @@
     if ($scope.childhoodNum === undefined)
         $scope.setPage(1);
 
+    function getChildhoodNum() {
+        var getData = crudService.sendRequest("get", "/Childhood/GetChildhoodNum");
+        getData.then(function (num) {
+            $scope.nums = num.data;
+        }, function () {
+            alert('Ошибка чтения записи');
+        });
+    }
+
     $scope.EditChild = function (child) {
-        GetChildhoodNum();
+        getChildhoodNum();
         $scope.edit = true;
         $scope.save = false;
         var getData = crudService.sendRequest("post","/Child/GetChildById", {id:child.Ind});
-        getData.then(function (_child) {
-            $scope.child = _child.data;
+        getData.then(function (item) {
+            $scope.child = item.data;
             $scope.Action = "Редактирование";
             $scope.divEdit = true;
         }, function () {
@@ -73,9 +83,9 @@
     };
 
     $scope.AddChild = function () {
-        var Child = $scope.child;
-        Child.Id = $scope.child.Ind;
-        var getData = crudService.sendRequest("post", "/Child/AddChild", { child: Child });
+        var child = $scope.child;
+        child.Id = $scope.child.Ind;
+        var getData = crudService.sendRequest("post", "/Child/AddChild", { child: child });
         getData.then(function (msg) {
             if ($scope.childhoodNum)
                 $scope.GetChildrenList(parseInt($scope.childhoodNum));
@@ -90,8 +100,8 @@
     };
 
     $scope.UpdateChild = function () {
-        var Child = $scope.child;
-        var getData = crudService.sendRequest("post", "/Child/UpdateChild", { child: Child });
+        var child = $scope.child;
+        var getData = crudService.sendRequest("post", "/Child/UpdateChild", { child: child });
         getData.then(function (msg) {
             if ($scope.childhoodNum)
                 $scope.GetChildrenList(parseInt($scope.childhoodNum));
@@ -107,7 +117,7 @@
 
     $scope.AddChildDiv = function () {
         $scope.child = null;
-        GetChildhoodNum();
+        getChildhoodNum();
         $scope.edit = false;
         $scope.save = true;
         $scope.Action = "Добавление";
@@ -127,16 +137,6 @@
             alert('Ошибка удаления записи');
         });
     };
-
-    function GetChildhoodNum() {
-        var getData = crudService.sendRequest("get", "/Childhood/GetChildhoodNum");
-        getData.then(function (_num) {
-            $scope.nums = _num.data;
-        }, function () {
-            alert('Ошибка чтения записи');
-        });
-    }
-
     $scope.Cancel = function () {
         $scope.divEdit = false;
     };

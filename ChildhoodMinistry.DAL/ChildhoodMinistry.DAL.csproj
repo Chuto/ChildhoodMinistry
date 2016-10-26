@@ -52,8 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChildhoodMinistryContext.cs" />
-    <Compile Include="Mapping\ChildhoodMap.cs" />
-    <Compile Include="Mapping\ChildMap.cs" />
     <Compile Include="Migrations\201610141530219_Init.cs" />
     <Compile Include="Migrations\201610141530219_Init.Designer.cs">
       <DependentUpon>201610141530219_Init.cs</DependentUpon>
@@ -65,6 +63,10 @@
     <Compile Include="Migrations\201610200956177_DelGuid.cs" />
     <Compile Include="Migrations\201610200956177_DelGuid.Designer.cs">
       <DependentUpon>201610200956177_DelGuid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610250821396_Convention.cs" />
+    <Compile Include="Migrations\201610250821396_Convention.Designer.cs">
+      <DependentUpon>201610250821396_Convention.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +88,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610200956177_DelGuid.resx">
       <DependentUpon>201610200956177_DelGuid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610250821396_Convention.resx">
+      <DependentUpon>201610250821396_Convention.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
