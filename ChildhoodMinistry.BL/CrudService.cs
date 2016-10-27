@@ -32,7 +32,7 @@ namespace ChildhoodMinistry.BL
 
         public void UpdateItem(T item)
         {
-            _repository.UpdateItem(item, item.Id);
+            _repository.UpdateItem(item);
             _repository.SaveChanges();
         }
 

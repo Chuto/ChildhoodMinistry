@@ -8,7 +8,7 @@ namespace ChildhoodMinistry.Contracts
         IQueryable<T> GetItems();
         T GetItemById(int id);
         void InsertItem(T item);
-        void UpdateItem(T item, object id);
+        void UpdateItem(T item);
         void DeleteItem(int id);
         void SaveChanges();
     }

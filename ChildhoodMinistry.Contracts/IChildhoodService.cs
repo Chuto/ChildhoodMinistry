@@ -6,7 +6,7 @@ namespace ChildhoodMinistry.Contracts
 {
     public interface IChildhoodService
     {
-        List<int> GetChildhoodNum();
+        List<int> GetNumberOfChildhoods();
         IPagedList<Childhood> GetPage(int? pageNum, int pageSize);
     }
 }

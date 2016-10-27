@@ -15,7 +15,7 @@ namespace ChildhoodMinistry.BL
             _childhoods = childhoods;            
         }
 
-        public List<int> GetChildhoodNum()
+        public List<int> GetNumberOfChildhoods()
         {
             return (from nums in _childhoods.GetItems()
                     orderby nums.Number
