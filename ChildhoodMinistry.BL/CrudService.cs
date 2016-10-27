@@ -5,11 +5,11 @@ using ChildhoodMinistry.Data.Model;
 
 namespace ChildhoodMinistry.BL
 {
-    public class CrudService<T> : ICrudService<T> where T : BaseEntity
+    public class CrudService<T> where T : BaseEntity
     {
-        private readonly IRepository<T> _repository; 
+        private readonly IRepository<T> _repository;
 
-        public CrudService(IRepository<T> repository)
+        protected CrudService(IRepository<T> repository)
         {
             _repository = repository;
         }

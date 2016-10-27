@@ -11,14 +11,12 @@ namespace ChildhoodMinistry.Web.Controllers
     public class ChildhoodController : Controller
     {
         readonly IChildhoodService _service;
-        private readonly ICrudService<Childhood> _crudService;
         private readonly IModelBuilder<ChildhoodViewModel, Childhood> _builder;
         readonly PageBuilder<ChildhoodViewModel> _pageBuilder = new PageBuilder<ChildhoodViewModel>();
 
-        public ChildhoodController(IChildhoodService service, ICrudService<Childhood> crudService, IModelBuilder<ChildhoodViewModel, Childhood> builder)
+        public ChildhoodController(IChildhoodService service, IModelBuilder<ChildhoodViewModel, Childhood> builder)
         {
             _service = service;
-            _crudService = crudService;
             _builder = builder;
         }
 
@@ -35,7 +33,7 @@ namespace ChildhoodMinistry.Web.Controllers
 
         public JsonResult GetChildhoodById(int id)
         {
-            var item = _crudService.GetItemById(id);
+            var item = _service.GetItemById(id);
             return Json(_builder.EntityToModel(item), JsonRequestBehavior.AllowGet);
         }
 
@@ -49,7 +47,7 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (childhood != null && ModelState.IsValid)
             {
-                _crudService.UpdateItem(_builder.ModelToEntiy(childhood));
+                _service.UpdateItem(_builder.ModelToEntiy(childhood));
                 return Json("Изменения успешно сохранены");
             }
             else
@@ -63,7 +61,7 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (childhood != null && ModelState.IsValid)
             {
-                _crudService.InsertItem(_builder.ModelToEntiy(childhood));
+                _service.InsertItem(_builder.ModelToEntiy(childhood));
                 return Json("Данные успешно добавлены");
             }
             else
@@ -74,8 +72,8 @@ namespace ChildhoodMinistry.Web.Controllers
 
         [HttpPost]
         public JsonResult DeleteChildhood(int id)
-        {  
-            _crudService.DeleteItem(id);
+        {
+            _service.DeleteItem(id);
             return Json("Запись успешно удалена");
         }
     }

@@ -11,13 +11,11 @@ namespace ChildhoodMinistry.Web.Controllers
     public class ChildController : Controller
     {
         readonly IChildService _service;
-        private readonly ICrudService<Child> _crudService;
         private readonly IModelBuilder<ChildViewModel, Child> _builder;
         readonly PageBuilder<ChildViewModel> _pageBuilder = new PageBuilder<ChildViewModel>(); 
 
-        public ChildController(IChildService service, ICrudService<Child> crudService, IModelBuilder<ChildViewModel, Child> builder)
+        public ChildController(IChildService service, IModelBuilder<ChildViewModel, Child> builder)
         {
-            _crudService = crudService;
             _service = service;
             _builder = builder;
         }
@@ -35,7 +33,7 @@ namespace ChildhoodMinistry.Web.Controllers
 
         public JsonResult GetChildById(int id)
         {
-            var item = _crudService.GetItemById(id);
+            var item = _service.GetItemById(id);
             return Json(_builder.EntityToModel(item), JsonRequestBehavior.AllowGet);
         }
 
@@ -50,7 +48,7 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (child != null && ModelState.IsValid)
             {
-                _crudService.UpdateItem(_builder.ModelToEntiy(child));
+                _service.UpdateItem(_builder.ModelToEntiy(child));
                 return Json("Изменения успешно сохранены");
             }
             else
@@ -64,7 +62,7 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (child != null && ModelState.IsValid)
             {
-                _crudService.InsertItem(_builder.ModelToEntiy(child));
+                _service.InsertItem(_builder.ModelToEntiy(child));
                 return Json("Данные успешно добавлены");
             }
             else
@@ -76,7 +74,7 @@ namespace ChildhoodMinistry.Web.Controllers
         [HttpPost]
         public JsonResult DeleteChild(int id)
         {
-            _crudService.DeleteItem(id);
+            _service.DeleteItem(id);
             return Json("Запись успешно удалена");
         }
     }

@@ -6,11 +6,11 @@ using ChildhoodMinistry.Data.Model;
 
 namespace ChildhoodMinistry.BL
 {
-    public class ChildService : IChildService
+    public class ChildService : CrudService<Child>, IChildService
     {
         private readonly IRepository<Child> _children;
 
-        public ChildService(IRepository<Child> children)
+        public ChildService(IRepository<Child> children) : base (children)
         {
             _children = children;
         }

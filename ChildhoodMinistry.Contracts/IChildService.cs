@@ -4,7 +4,7 @@ using PagedList;
 
 namespace ChildhoodMinistry.Contracts
 {
-    public interface IChildService
+    public interface IChildService : ICrudService<Child>
     {
         List<Child> GetChildByChildhoodId(int id);
         IPagedList<Child> GetPage(int? pageNum, int pageSize);

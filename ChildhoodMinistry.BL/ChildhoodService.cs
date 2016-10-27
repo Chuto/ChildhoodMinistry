@@ -6,13 +6,13 @@ using ChildhoodMinistry.Data.Model;
 
 namespace ChildhoodMinistry.BL
 {
-    public class ChildhoodService : IChildhoodService
+    public class ChildhoodService : CrudService<Childhood>, IChildhoodService 
     {
         private readonly IRepository<Childhood> _childhoods;
 
-        public ChildhoodService(IRepository<Childhood> childhoods)
+        public ChildhoodService(IRepository<Childhood> childhoods) : base(childhoods)
         {
-            _childhoods = childhoods;            
+            _childhoods = childhoods;
         }
 
         public List<int> GetNumberOfChildhoods()

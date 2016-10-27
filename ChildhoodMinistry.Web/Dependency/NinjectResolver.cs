@@ -43,14 +43,6 @@ namespace ChildhoodMinistry.Web.Dependency
             _kernel.Bind(convention => convention
                 .FromAssembliesMatching("ChildhoodMinistry.*")
                 .SelectAllClasses()
-                .InheritedFrom(typeof(ICrudService<>))
-                .BindSingleInterface()
-                .Configure(obj => obj.InTransientScope())
-            );
-
-            _kernel.Bind(convention => convention
-                .FromAssembliesMatching("ChildhoodMinistry.*")
-                .SelectAllClasses()
                 .InheritedFrom(typeof(IModelBuilder<,>))
                 .BindSingleInterface()
                 .Configure(obj => obj.InTransientScope())
