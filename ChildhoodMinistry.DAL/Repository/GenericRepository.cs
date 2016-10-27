@@ -35,10 +35,9 @@ namespace ChildhoodMinistry.DAL.Repository
             Entities.Add(entity);
         }
 
-        public void UpdateItem(T entity, object id)
+        public void UpdateItem(T entity)
         {
-            Entities.Remove(Entities.Find(id));
-            Entities.Add(entity);
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
         public void DeleteItem(int id)
