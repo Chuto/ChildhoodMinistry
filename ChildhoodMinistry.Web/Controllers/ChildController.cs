@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using ChildhoodMinistry.Contracts;
@@ -40,9 +39,9 @@ namespace ChildhoodMinistry.Web.Controllers
             return Json(_builder.EntityToModel(item), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetChildByChildhoodId(int id)
+        public JsonResult GetChildByChildhoodNum(int num)
         {
-            var result = _childhood.GetItems().First(s => s.Number == id).Children.Select(item => _builder.EntityToModel(item)).ToList();
+            var result = _childhood.GetItems().First(s => s.Number == num).Children.Select(item => _builder.EntityToModel(item)).ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -52,7 +51,7 @@ namespace ChildhoodMinistry.Web.Controllers
             if (child != null && ModelState.IsValid)
             {
                 var item = _builder.ModelToEntiy(child);
-                item.ChildhoodId = _childhood.GetItems().First(s => s.Number == child.ChildhoodNum).Id;//_childhood.GetChildhoodByNum(child.ChildhoodNum).Id;
+                item.ChildhoodId = _childhood.GetItems().First(s => s.Number == child.ChildhoodNum).Id;
                 _service.UpdateItem(item);
                 return Json("Изменения успешно сохранены");
             }
@@ -68,7 +67,7 @@ namespace ChildhoodMinistry.Web.Controllers
             if (child != null && ModelState.IsValid)
             {
                 var item = _builder.ModelToEntiy(child);
-                item.ChildhoodId = _childhood.GetItems().First(s => s.Number == child.ChildhoodNum).Id;//_childhood.GetChildhoodByNum(child.ChildhoodNum).Id;
+                item.ChildhoodId = _childhood.GetItems().First(s => s.Number == child.ChildhoodNum).Id;
                 _service.InsertItem(item);
                 return Json("Данные успешно добавлены");
             }

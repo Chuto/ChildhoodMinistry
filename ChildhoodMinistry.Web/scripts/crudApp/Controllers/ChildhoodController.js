@@ -59,11 +59,11 @@
 
     $scope.setPage(1);
 
-    $scope.GetChildrenList = function (childhoodId) {
-        var getData = crudService.sendRequest("post", "/Child/GetChildByChildhoodId", { id: childhoodId });
+    $scope.GetChildrenList = function (childhoodNum) {
+        var getData = crudService.sendRequest("post", "/Child/GetChildByChildhoodNum", { num: childhoodNum });
         getData.then(function (childrenList) {
             $scope.children = childrenList.data;
-            $scope.childhoodNum = childhoodId;
+            $scope.childhoodNum = childhoodNum;
 
             $scope.divList = true;
             $scope.divEdit = false;

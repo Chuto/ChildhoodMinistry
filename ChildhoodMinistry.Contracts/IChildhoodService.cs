@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ChildhoodMinistry.Data.Model;
+﻿using ChildhoodMinistry.Data.Model;
 using PagedList;
 
 namespace ChildhoodMinistry.Contracts

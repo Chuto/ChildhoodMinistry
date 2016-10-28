@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using PagedList;
 using ChildhoodMinistry.Contracts;
 using ChildhoodMinistry.Data.Model;

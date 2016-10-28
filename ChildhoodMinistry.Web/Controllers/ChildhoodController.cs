@@ -37,7 +37,7 @@ namespace ChildhoodMinistry.Web.Controllers
             return Json(_builder.EntityToModel(item), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetNumberOfChildhoods()
+        public JsonResult GetNumbersOfChildhoods()
         {
             return Json(_service.GetItems().Select(s => s.Number).ToList(), JsonRequestBehavior.AllowGet);
         }
