@@ -8,5 +8,6 @@ namespace ChildhoodMinistry.Contracts
     {
         List<int> GetNumberOfChildhoods();
         IPagedList<Childhood> GetPage(int? pageNum, int pageSize);
+        Childhood GetChildhoodByNum(int num);
     }
 }

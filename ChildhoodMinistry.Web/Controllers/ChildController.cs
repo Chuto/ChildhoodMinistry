@@ -11,12 +11,14 @@ namespace ChildhoodMinistry.Web.Controllers
     public class ChildController : Controller
     {
         readonly IChildService _service;
+        readonly IChildhoodService _childhood;
         private readonly IModelBuilder<ChildViewModel, Child> _builder;
         readonly PageBuilder<ChildViewModel> _pageBuilder = new PageBuilder<ChildViewModel>(); 
 
-        public ChildController(IChildService service, IModelBuilder<ChildViewModel, Child> builder)
+        public ChildController(IChildService service, IChildhoodService childhood, IModelBuilder<ChildViewModel, Child> builder)
         {
             _service = service;
+            _childhood = childhood;
             _builder = builder;
         }
 
@@ -39,6 +41,7 @@ namespace ChildhoodMinistry.Web.Controllers
 
         public JsonResult GetChildByChildhoodId(int id)
         {
+            id = _childhood.GetChildhoodByNum(id).Id;
             var result = _service.GetChildByChildhoodId(id).Select(item => _builder.EntityToModel(item)).ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -48,7 +51,9 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (child != null && ModelState.IsValid)
             {
-                _service.UpdateItem(_builder.ModelToEntiy(child));
+                var item = _builder.ModelToEntiy(child);
+                item.ChildhoodId = _childhood.GetChildhoodByNum(child.ChildhoodNum).Id;
+                _service.UpdateItem(item);
                 return Json("Изменения успешно сохранены");
             }
             else
@@ -62,7 +67,9 @@ namespace ChildhoodMinistry.Web.Controllers
         {
             if (child != null && ModelState.IsValid)
             {
-                _service.InsertItem(_builder.ModelToEntiy(child));
+                var item = _builder.ModelToEntiy(child);
+                item.ChildhoodId = _childhood.GetChildhoodByNum(child.ChildhoodNum).Id;
+                _service.InsertItem(item);
                 return Json("Данные успешно добавлены");
             }
             else

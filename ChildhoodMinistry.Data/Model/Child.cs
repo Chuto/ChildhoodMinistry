@@ -7,5 +7,6 @@
         public string Patronymic { get; set; }
         public int Age { get; set; }
         public int ChildhoodId { get; set; }
+        public virtual Childhood Childhood { get; set; }
     }
 }

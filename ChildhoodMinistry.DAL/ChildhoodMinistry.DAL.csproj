@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201610250821396_Convention.Designer.cs">
       <DependentUpon>201610250821396_Convention.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610280816433_Relationship.cs" />
+    <Compile Include="Migrations\201610280816433_Relationship.Designer.cs">
+      <DependentUpon>201610280816433_Relationship.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
@@ -91,6 +95,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610250821396_Convention.resx">
       <DependentUpon>201610250821396_Convention.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610280816433_Relationship.resx">
+      <DependentUpon>201610280816433_Relationship.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

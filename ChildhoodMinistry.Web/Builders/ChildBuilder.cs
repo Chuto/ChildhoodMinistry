@@ -11,7 +11,7 @@ namespace ChildhoodMinistry.Web.Builders
             return new ChildViewModel
             {
                 Age = item.Age,
-                ChildhoodNum = item.ChildhoodId,
+                ChildhoodNum = item.Childhood.Number,
                 Ind = item.Id,
                 Name = item.Name,
                 Patronymic = item.Patronymic,
@@ -24,7 +24,6 @@ namespace ChildhoodMinistry.Web.Builders
             return new Child
             {
                 Age = item.Age,
-                ChildhoodId = item.ChildhoodNum,
                 Id = item.Ind,
                 Name = item.Name,
                 Patronymic = item.Patronymic,
