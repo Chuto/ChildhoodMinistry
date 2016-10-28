@@ -3,7 +3,7 @@
     $scope.pager = {};
     $scope.setPage = function (page) {
         if (page < 1 || page > $scope.pager.totalPages) {
-            return;
+            page = 1;
         }
         var currentPage = page || 1;
         var pageSize = 2;

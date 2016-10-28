@@ -4,7 +4,7 @@
 
     $scope.setPage = function (page) {
         if (page < 1 || page > $scope.pager.totalPages) {
-            return;
+            page = 1;
         }
         $scope.divEdit = false;
         $scope.divList = false;
