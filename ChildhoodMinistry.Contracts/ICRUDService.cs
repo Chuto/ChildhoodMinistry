@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ChildhoodMinistry.Contracts
 {
     public interface ICrudService<T>
     {
-        List<T> GetItems();
+        IQueryable<T> GetItems();
         T GetItemById(int id);
         void InsertItem(T item);
         void UpdateItem(T item);

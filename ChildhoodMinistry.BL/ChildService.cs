@@ -14,12 +14,7 @@ namespace ChildhoodMinistry.BL
         {
             _children = children;
         }
-
-        public List<Child> GetChildByChildhoodId(int id)
-        {
-            return _children.GetItems().Where(s => s.ChildhoodId == id).ToList();
-        }
-
+        
         public IPagedList<Child> GetPage(int? pageNum, int pageSize)
         {
             return _children.GetItems().OrderBy(x => x.Surname).ToPagedList((pageNum ?? 1), pageSize);

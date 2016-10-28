@@ -14,9 +14,9 @@ namespace ChildhoodMinistry.BL
             _repository = repository;
         }
 
-        public List<T> GetItems()
+        public IQueryable<T> GetItems()
         {
-            return _repository.GetItems().ToList();
+            return _repository.GetItems();
         }
 
         public T GetItemById(int id)

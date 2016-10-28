@@ -15,21 +15,9 @@ namespace ChildhoodMinistry.BL
             _childhoods = childhoods;
         }
 
-        public List<int> GetNumberOfChildhoods()
-        {
-            return (from nums in _childhoods.GetItems()
-                    orderby nums.Number
-                    select nums.Number).ToList();
-        }
-
         public IPagedList<Childhood> GetPage(int? pageNum, int pageSize)
         {
             return _childhoods.GetItems().OrderBy(x => x.Number).ToPagedList((pageNum ?? 1), pageSize);
-        }
-
-        public Childhood GetChildhoodByNum(int num)
-        {
-            return _childhoods.GetItems().First(x => x.Number == num);
         }
     }
 }
