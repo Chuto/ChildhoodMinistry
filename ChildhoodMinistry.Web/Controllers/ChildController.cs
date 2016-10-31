@@ -51,7 +51,6 @@ namespace ChildhoodMinistry.Web.Controllers
             if (child != null && ModelState.IsValid)
             {
                 var item = _builder.ModelToEntiy(child);
-                item.ChildhoodId = _childhood.GetItems().First(s => s.Number == child.ChildhoodNum).Id;
                 _service.UpdateItem(item);
                 return Json("Изменения успешно сохранены");
             }
@@ -67,7 +66,6 @@ namespace ChildhoodMinistry.Web.Controllers
             if (child != null && ModelState.IsValid)
             {
                 var item = _builder.ModelToEntiy(child);
-                item.ChildhoodId = _childhood.GetItems().First(s => s.Number == child.ChildhoodNum).Id;
                 _service.InsertItem(item);
                 return Json("Данные успешно добавлены");
             }

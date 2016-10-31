@@ -15,7 +15,8 @@ namespace ChildhoodMinistry.Web.Builders
                 Ind = item.Id,
                 Name = item.Name,
                 Patronymic = item.Patronymic,
-                Surname = item.Surname
+                Surname = item.Surname,
+                ChildhoodId = item.ChildhoodId
             };
         }
 
@@ -27,7 +28,8 @@ namespace ChildhoodMinistry.Web.Builders
                 Id = item.Ind,
                 Name = item.Name,
                 Patronymic = item.Patronymic,
-                Surname = item.Surname
+                Surname = item.Surname,
+                ChildhoodId = item.ChildhoodId,
             };
         }
     }

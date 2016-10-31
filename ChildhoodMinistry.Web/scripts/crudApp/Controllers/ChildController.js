@@ -84,7 +84,7 @@
 
     $scope.AddChild = function () {
         var child = $scope.child;
-        child.Id = $scope.child.Ind;
+        child.ChildhoodId = $.grep($scope.nums, function (e) { return e.Number == child.ChildhoodNum })[0].Ind;
         var getData = crudService.sendRequest("post", "/Child/AddChild", { child: child });
         getData.then(function (msg) {
             if ($scope.childhoodNum)
@@ -101,6 +101,7 @@
 
     $scope.UpdateChild = function () {
         var child = $scope.child;
+        child.ChildhoodId = $.grep($scope.nums, function (e) { return e.Number == $scope.child.ChildhoodNum })[0].Ind;
         var getData = crudService.sendRequest("post", "/Child/UpdateChild", { child: child });
         getData.then(function (msg) {
             if ($scope.childhoodNum)

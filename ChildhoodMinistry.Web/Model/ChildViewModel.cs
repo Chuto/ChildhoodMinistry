@@ -18,5 +18,6 @@ namespace ChildhoodMinistry.Web.Model
         public int Age { get; set; }
         [Required]
         public int ChildhoodNum { get; set; }    
+        public int ChildhoodId { get; set; }
     }
 }

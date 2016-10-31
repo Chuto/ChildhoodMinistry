@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using ChildhoodMinistry.Contracts;
@@ -39,7 +40,10 @@ namespace ChildhoodMinistry.Web.Controllers
 
         public JsonResult GetNumbersOfChildhoods()
         {
-            return Json(_service.GetItems().Select(s => s.Number).ToList(), JsonRequestBehavior.AllowGet);
+            var result = new List<ChildhoodViewModel>();
+            foreach (var item in _service.GetItems())
+                result.Add(_builder.EntityToModel(item));
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
