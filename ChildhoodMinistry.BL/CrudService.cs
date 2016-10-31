@@ -4,7 +4,7 @@ using ChildhoodMinistry.Data.Model;
 
 namespace ChildhoodMinistry.BL
 {
-    public class CrudService<T> where T : BaseEntity
+    public abstract class CrudService<T> : ICrudService<T> where T : BaseEntity
     {
         private readonly IRepository<T> _repository;
 
@@ -13,29 +13,29 @@ namespace ChildhoodMinistry.BL
             _repository = repository;
         }
 
-        public IQueryable<T> GetItems()
+        public virtual IQueryable<T> GetItems()
         {
             return _repository.GetItems();
         }
 
-        public T GetItemById(int id)
+        public virtual T GetItemById(int id)
         {
             return _repository.GetItemById(id);
         }
 
-        public void InsertItem(T item)
+        public virtual void InsertItem(T item)
         {
             _repository.InsertItem(item);
             _repository.SaveChanges();
         }
 
-        public void UpdateItem(T item)
+        public virtual void UpdateItem(T item)
         {
             _repository.UpdateItem(item);
             _repository.SaveChanges();
         }
 
-        public void DeleteItem(int id)
+        public virtual void DeleteItem(int id)
         {
             _repository.DeleteItem(id);
             _repository.SaveChanges();
