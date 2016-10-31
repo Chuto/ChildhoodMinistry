@@ -30,18 +30,20 @@ namespace ChildhoodMinistry.Web.Controllers
         public JsonResult GetPage(int? page, int pageSize)
         {
             var list = _service.GetPage(page, pageSize);
-            return Json(_pageBuilder.BuildPage(list, list.Select(item => _builder.EntityToModel(item)).ToList()), JsonRequestBehavior.AllowGet);
+            var result = _pageBuilder.BuildPage(list,list.Select(item => _builder.EntityToModel(item)).ToList());
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetChildById(int id)
         {
-            var item = _service.GetItemById(id);
-            return Json(_builder.EntityToModel(item), JsonRequestBehavior.AllowGet);
+            var result = _builder.EntityToModel(_service.GetItemById(id));
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetChildByChildhoodNum(int num)
         {
-            var result = _childhood.GetItems().First(s => s.Number == num).Children.Select(item => _builder.EntityToModel(item)).ToList();
+            var children = _childhood.GetItems().First(s => s.Number == num).Children;
+            var result = children.Select(item => _builder.EntityToModel(item)).ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

@@ -60,7 +60,7 @@
         $scope.setPage(1);
 
     function getChildhoodNum() {
-        var getData = crudService.sendRequest("get", "/Childhood/GetNumbersOfChildhoods");
+        var getData = crudService.sendRequest("get", "/Childhood/GetChildhoods");
         getData.then(function (num) {
             $scope.nums = num.data;
         }, function () {
