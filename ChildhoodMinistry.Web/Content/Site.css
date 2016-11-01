@@ -19,3 +19,18 @@ textarea {
     max-width: 280px;
 }
 
+
+.elegant-aero {
+  margin-top: 25px;
+}
+
+.elegant-aero label {
+  display: block;
+  margin: 0px 0px 5px;
+}
+
+.elegant-aero input[type="text"] {
+  width: 60%;
+  height: 30px;
+  margin: 2px 6px 16px 0px;
+}

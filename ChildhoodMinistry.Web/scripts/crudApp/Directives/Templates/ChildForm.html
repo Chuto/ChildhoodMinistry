@@ -1,0 +1,22 @@
+﻿<form name="exampleForm" class="elegant-aero">
+    <label>Фамилия</label>
+    <input type="text" ng-model="child.Surname"/>
+
+    <label>Имя</label>
+    <input type="text" ng-model="child.Name"/>
+
+    <label>Отчество</label>
+    <input type="text" ng-model="child.Patronymic"/>
+
+    <label>Возраст</label>
+    <input type="text" ng-model="child.Age"/>
+
+    <label>Номер детсада</label>
+    <input type="text" ng-model="child.ChildhoodNum" disabled="disabled" />
+    <select ng-model="child.ChildhoodNum">
+        <option ng-repeat="num in nums">{{num.Number}}</option>
+    </select>
+    <br/>
+    <input type="button" ng-click="Submit()" class="btn btn-default" value="Сохранить"/>
+    <input type="button" ng-click="Cancel()" class="btn btn-danger" value="Отменить" />
+</form>
