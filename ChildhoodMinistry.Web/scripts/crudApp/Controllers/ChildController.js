@@ -1,5 +1,7 @@
 ﻿app.controller("ChildCRUDCtrl", function ($scope, crudService) {
 
+    $scope.Submit;
+
     $scope.pager = {};
     $scope.setPage = function (page) {
         if (page < 1 || page > $scope.pager.totalPages) {
@@ -69,6 +71,7 @@
     }
 
     $scope.EditChild = function (child) {
+        $scope.Submit = $scope.UpdateChild;
         getChildhoodNum();
         $scope.edit = true;
         $scope.save = false;
@@ -117,6 +120,7 @@
     };
 
     $scope.AddChildDiv = function () {
+        $scope.Submit = $scope.AddChild;
         $scope.child = null;
         getChildhoodNum();
         $scope.edit = false;

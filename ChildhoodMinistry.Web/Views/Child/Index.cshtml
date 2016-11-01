@@ -1,7 +1,19 @@
 ﻿@{
     ViewBag.Title = "NewIndex";
 }
-<h2>Список детей</h2>
-<div>
-    <div dir-list-items typeof="list" children="children"></div>
+<div ng-controller="ChildCRUDCtrl">
+    <div>
+        <div dir-child-list children="children" edit-func="EditChild" delete-func="DeleteChild" />
+    </div>
+    <div>
+        <div dir-pagination load-page="setPage" page="pager"/>
+    </div>
+
+    <span ng-click="AddChildDiv()" class="btn btn-default">Добавить ребёнка</span>
+    <div ng-show="divEdit" ng-cloak>
+        <div>
+            <div dir-child-form child="child" cancel="Cancel" submit="Submit" nums="nums"></div>
+        </div>
+    </div>
+
 </div>
