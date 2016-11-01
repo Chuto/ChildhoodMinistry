@@ -42,7 +42,7 @@ namespace ChildhoodMinistry.Web.Controllers
 
         public JsonResult GetChildByChildhoodNum(int num)
         {
-            var children = _childhood.GetItems().First(s => s.Number == num).Children;
+            var children = _childhood.GetChildhoodByNum(num).Children;
             var result = children.Select(item => _builder.EntityToModel(item)).ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }

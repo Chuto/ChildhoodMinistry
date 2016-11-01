@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using ChildhoodMinistry.Contracts;
 using ChildhoodMinistry.Data.Model;
 
@@ -13,9 +14,9 @@ namespace ChildhoodMinistry.BL
             _repository = repository;
         }
 
-        public virtual IQueryable<T> GetItems()
+        public virtual List<T> GetItems()
         {
-            return _repository.GetItems();
+            return _repository.GetItems().ToList();
         }
 
         public virtual T GetItemById(int id)
