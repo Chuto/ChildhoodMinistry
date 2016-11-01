@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Angular";
+}
+
+<h2>Список детсадов</h2>
+<div ng-controller="ChildhoodCRUDCtrl">
+    <div class="data">
+        <table class="table table-hover">
+            <tr>
+                <td>Номер детсада</td>
+                <td>Адрес</td>
+            </tr>
+            <tr ng-repeat="childhood in childhoods" ng-cloak>
+                <td>
+                    {{childhood.Number}}
+                </td>
+                <td>
+                    {{childhood.Adress}}
+                </td>
+                <td>
+                    <span ng-click="GetChildrenList(childhood.Ind)" class="btn btn-primary">Список детей</span>
+                    <span ng-click="EditChildhood(childhood.Ind)" class="btn btn-primary">Редактировать</span>
+                    <span ng-click="DeleteChildhood(childhood.Ind)" class="btn btn-danger">Удалить</span>
+                </td>
+            </tr>
+        </table>
+
+            <div class="container" ng-cloak="true">
+                <ul ng-if="pager.pages.length" class="pagination">
+                    <li ng-class="{disabled:pager.currentPage === 1}">
+                        <a ng-click="setPage(1)">First</a>
+                    </li>
+                    <li ng-class="{disabled:pager.currentPage === 1}">
+                        <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+                    </li>
+                    <li ng-repeat="page in pager.pages" ng-class="{active:pager.currentPage === page}">
+                        <a ng-click="setPage(page)">{{page}}</a>
+                    </li>
+                    <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                        <a ng-click="setPage(pager.currentPage + 1)">Next</a>
+                    </li>
+                    <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                        <a ng-click="setPage(pager.totalPages)">Last</a>
+                    </li>
+                </ul>
+            </div>    
+    </div>
+    <span ng-click="AddChildhoodDiv()" class="btn btn-default" ng-cloak>Добавить детсад</span>
+    <div ng-show="divEdit" ng-cloak>
+        <table class="table">
+            <tr>
+                <td>{{Action}} записи</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Номер детсада
+                </td>
+                <td>
+                    <input type="text" ng-model="childhood.Number" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Адрес
+                </td>
+                <td>
+                    <input type="text" ng-model="childhood.Adress" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" ng-show="save" ng-click="AddChildhood()" class="btn btn-default" value="Сохранить" />
+                    <input type="button" ng-show="edit" ng-click="UpdateChildhood()" class="btn btn-default" value="Сохранить" />
+                </td>
+                <td>
+                    <input type="button" ng-click="CancelChildrenList()" class="btn btn-danger" value="Отменить" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div ng-show="divList" ng-cloak>
+        <h2>Список детей</h2>
+        <div dir-list-items typeof="list" children="children" childhood-num="{{childhoodNum}}" get-children-list="GetChildrenList"></div>
+        <input type="button" ng-click="CancelChildrenList()" class="btn btn-danger" value="Закрыть" />
+    </div>
+</div>
