@@ -223,6 +223,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interface\IModelBuilder.cs" />
     <Compile Include="Model\ChildhoodViewModel.cs" />
     <Compile Include="Model\ChildViewModel.cs" />
     <Compile Include="Model\PagingViewModel.cs" />

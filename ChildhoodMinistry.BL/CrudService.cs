@@ -14,7 +14,7 @@ namespace ChildhoodMinistry.BL
             _repository = repository;
         }
 
-        public virtual List<T> GetItems()
+        public virtual IList<T> GetItems()
         {
             return _repository.GetItems().ToList();
         }

@@ -4,7 +4,7 @@ namespace ChildhoodMinistry.Contracts
 {
     public interface ICrudService<T>
     {
-        List<T> GetItems();
+        IList<T> GetItems();
         T GetItemById(int id);
         void InsertItem(T item);
         void UpdateItem(T item);

@@ -1,5 +1,5 @@
-﻿using ChildhoodMinistry.Contracts;
-using ChildhoodMinistry.Data.Model;
+﻿using ChildhoodMinistry.Data.Model;
+using ChildhoodMinistry.Web.Interface;
 using ChildhoodMinistry.Web.Model;
 
 namespace ChildhoodMinistry.Web.Builders

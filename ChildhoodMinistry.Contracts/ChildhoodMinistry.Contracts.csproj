@@ -47,7 +47,6 @@
     <Compile Include="IChildhoodService.cs" />
     <Compile Include="IChildService.cs" />
     <Compile Include="ICrudService.cs" />
-    <Compile Include="IModelBuilder.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

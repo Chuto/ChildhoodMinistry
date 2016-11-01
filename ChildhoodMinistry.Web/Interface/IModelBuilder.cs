@@ -1,4 +1,4 @@
-﻿namespace ChildhoodMinistry.Contracts
+﻿namespace ChildhoodMinistry.Web.Interface
 {
     public interface IModelBuilder<TViewmodel, TEntity>
     {

@@ -6,6 +6,7 @@ using ChildhoodMinistry.Contracts;
 using ChildhoodMinistry.Data.Model;
 using ChildhoodMinistry.Web.Model;
 using ChildhoodMinistry.Web.Builders;
+using ChildhoodMinistry.Web.Interface;
 
 namespace ChildhoodMinistry.Web.Controllers
 {

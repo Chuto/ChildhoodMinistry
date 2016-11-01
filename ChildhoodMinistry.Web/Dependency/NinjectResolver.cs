@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Web.Mvc;
 using ChildhoodMinistry.Contracts;
 using ChildhoodMinistry.DAL;
+using ChildhoodMinistry.Web.Interface;
 using Ninject;
 using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
