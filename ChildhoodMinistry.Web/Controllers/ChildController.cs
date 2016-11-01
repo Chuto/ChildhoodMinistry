@@ -12,14 +12,12 @@ namespace ChildhoodMinistry.Web.Controllers
     public class ChildController : Controller
     {
         readonly IChildService _service;
-        readonly IChildhoodService _childhood;
         private readonly IModelBuilder<ChildViewModel, Child> _builder;
         readonly PageBuilder<ChildViewModel> _pageBuilder = new PageBuilder<ChildViewModel>(); 
 
-        public ChildController(IChildService service, IChildhoodService childhood, IModelBuilder<ChildViewModel, Child> builder)
+        public ChildController(IChildService service, IModelBuilder<ChildViewModel, Child> builder)
         {
             _service = service;
-            _childhood = childhood;
             _builder = builder;
         }
 
@@ -41,9 +39,9 @@ namespace ChildhoodMinistry.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetChildByChildhoodNum(int num)
+        public JsonResult GetChildByChildhoodNum(int id)
         {
-            var children = _childhood.GetChildhoodByNum(num).Children;
+            var children = _service.GetChildrenByChildhoodId(id);
             var result = children.Select(item => _builder.EntityToModel(item)).ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
