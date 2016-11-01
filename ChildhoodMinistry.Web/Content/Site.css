@@ -34,3 +34,9 @@ textarea {
   height: 30px;
   margin: 2px 6px 16px 0px;
 }
+
+.elegant-aero div{
+  display:inline-block;
+  vertical-align:top;
+  margin-top: 5px;
+}
