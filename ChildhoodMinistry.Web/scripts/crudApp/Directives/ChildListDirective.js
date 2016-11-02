@@ -3,9 +3,9 @@
         replace: false,
         restrict: "A",
         scope: {
-            children: "=children",
-            Edit: "=editFunc",
-            Delete: "=deleteFunc"
+            children: "=",
+            onEdit: "&",
+            onDelete: "&"
         },
         templateUrl: "/scripts/crudApp/Directives/Templates/ChildList.html"
     };

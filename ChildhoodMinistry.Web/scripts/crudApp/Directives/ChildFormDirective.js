@@ -3,10 +3,9 @@
         replace: false,
         restrict: "A",
         scope: {
-            child: "=child",
-            Cancel: "=cancel",
-            nums: "=nums",
-            Submit: "=submit"
+            child: "=",
+            nums: "=",
+            confirm: "&"
         },
         templateUrl: "/scripts/crudApp/Directives/Templates/ChildForm.html"
     };

@@ -17,8 +17,8 @@
             {{child.Age}}
         </td>
         <td>
-            <span ng-click="Edit(child)" class="btn btn-primary">Редактировать</span>
-            <span ng-click="Delete(child.Ind)" class="btn btn-danger">Удалить</span>
+            <span ng-click="onEdit({child:child})" class="btn btn-primary">Редактировать</span>
+            <span ng-click="onDelete({id:child.Ind})" class="btn btn-danger">Удалить</span>
         </td>
     </tr>
 </table>

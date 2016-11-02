@@ -1,13 +1,13 @@
 ﻿app.controller("ChildCRUDCtrl", function ($window, $scope, crudChildService) {
     $scope.ready = false;
-    $scope.Submit;
+    $scope.confirm;
 
     $scope.setPage = function (page) {
         if (page < 1 || page > $scope.totalPages) {
             return;
         }
         var pageSize = 2;
-        $scope.divEdit = false;
+        $scope.Cancel();
         var getData = crudChildService.GetPageOfChild(page || 1, pageSize);
         getData.then(function (respon) {
             $scope.children = respon.data.Data;
@@ -19,9 +19,7 @@
         });
     };
 
-    $scope.setPage(1);
-
-    function getChildhoodNum() {
+    function getChildhoods() {
         var getData = crudChildService.GetChildhoods();
         getData.then(function (num) {
             $scope.nums = num.data;
@@ -31,26 +29,19 @@
     }
 
     $scope.EditChild = function (child) {
-        $scope.Submit = $scope.UpdateChild;
-        getChildhoodNum();
-        var getData = crudChildService.GetChildById(child.Ind);
-        getData.then(function (item) {
-            $scope.child = item.data;
-            $scope.Action = "Редактирование";
-            $scope.divEdit = true;
-        }, function () {
-            alert('Ошибка чтения записи');
-        });
+        $scope.confirm = $scope.UpdateChild;
+        $scope.child = angular.copy(child);
+        $scope.divEdit = true;
+        getChildhoods();
     };
 
     $scope.AddChild = function () {
-        var child = $scope.child;
         $scope.child.ChildhoodId = $.grep($scope.nums, function (e) { return e.Number == $scope.child.ChildhoodNum })[0].Ind;
         var getData = crudChildService.AddChild($scope.child);
         getData.then(function (msg) {
             $window.location.href = '/Child';
             alert(msg.data);
-            $scope.divEdit = false;
+            $scope.Cancel();
         }, function () {
             alert('Ошибка обновления записи');
         });
@@ -62,32 +53,34 @@
         getData.then(function (msg) {
             $window.location.href = '/Child';
             alert(msg.data);
-            $scope.divEdit = false;
+            $scope.Cancel();
         }, function () {
             alert('Ошибка добавления записи');
         });
     };
 
     $scope.AddChildDiv = function () {
-        $scope.Submit = $scope.AddChild;
+        $scope.confirm = $scope.AddChild;
         $scope.child = {};
-        getChildhoodNum();
-        $scope.Action = "Добавление";
         $scope.divEdit = true;
+        getChildhoods();
     };
 
     $scope.DeleteChild = function (Ind) {
         var getData = crudChildService.DeleteChild(Ind);
         getData.then(function (msg) {
             alert(msg.data);
-            $scope.divEdit = false;
+            $scope.Cancel();
             $window.location.href = '/Child';
         }, function () {
             alert('Ошибка удаления записи');
         });
     };
+
     $scope.Cancel = function () {
         $scope.divEdit = false;
     };
+
+    $scope.setPage(1);
 });
 

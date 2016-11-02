@@ -1,4 +1,4 @@
-﻿<form name="childForm" class="elegant-aero" ng-submit="Submit()" novalidate>
+﻿<form name="childForm" class="elegant-aero" ng-submit="confirm()" novalidate>
     <label>Фамилия</label>
     <input type="text" name="childSurname" ng-model="child.Surname" ng-pattern="/^[А-я]{2,}$/" required/>
     <div ng-show="childForm.childSurname.$invalid && !childForm.childSurname.$pristine">
@@ -38,5 +38,5 @@
 
     <br/>
     <button type="submit" class="btn btn-primary" ng-disabled="childForm.$invalid">Сохранить</button>
-    <input type="button" ng-click="Cancel()" class="btn btn-danger" value="Отменить" />
+
 </form>
