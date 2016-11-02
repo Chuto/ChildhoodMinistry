@@ -196,6 +196,7 @@
     <Content Include="scripts\crudApp\Directives\Templates\ChildForm.html" />
     <Content Include="scripts\crudApp\Directives\Templates\ChildList.html" />
     <Content Include="scripts\crudApp\Directives\Templates\Pagination.html" />
+    <Content Include="scripts\crudApp\Services\ChildService.js" />
     <Content Include="scripts\crudApp\Services\crudService.js" />
     <Content Include="scripts\errors.json" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />

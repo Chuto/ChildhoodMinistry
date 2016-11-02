@@ -1,4 +1,4 @@
-﻿app.controller("ChildCRUDCtrl", function ($scope, crudService) {
+﻿app.controller("ChildCRUDCtrl", function ($scope, crudChildService) {
 
     $scope.Submit;
 
@@ -12,7 +12,7 @@
         $scope.edit = false;
         $scope.save = false;
         $scope.divEdit = false;
-        var getData = crudService.sendRequest("post", "/Child/GetPage", { page: currentPage, pageSize: pageSize });
+        var getData = crudChildService.GetPageOfChild(currentPage, pageSize);
         getData.then(function (respon) {
             $scope.children = respon.data.Data;
             currentPage = respon.data.Page.CurrentPage;
@@ -62,7 +62,7 @@
         $scope.setPage(1);
 
     function getChildhoodNum() {
-        var getData = crudService.sendRequest("get", "/Childhood/GetChildhoods");
+        var getData = crudChildService.GetChildhoods();
         getData.then(function (num) {
             $scope.nums = num.data;
         }, function () {
@@ -75,7 +75,7 @@
         getChildhoodNum();
         $scope.edit = true;
         $scope.save = false;
-        var getData = crudService.sendRequest("post","/Child/GetChildById", {id:child.Ind});
+        var getData = crudChildService.GetChildById(child.Ind);
         getData.then(function (item) {
             $scope.child = item.data;
             $scope.Action = "Редактирование";
@@ -88,7 +88,7 @@
     $scope.AddChild = function () {
         var child = $scope.child;
         child.ChildhoodId = $.grep($scope.nums, function (e) { return e.Number == child.ChildhoodNum })[0].Ind;
-        var getData = crudService.sendRequest("post", "/Child/AddChild", { child: child });
+        var getData = crudChildService.AddChild(child);
         getData.then(function (msg) {
             if ($scope.childhoodNum)
                 $scope.GetChildrenList(parseInt($scope.childhoodNum));
@@ -105,7 +105,7 @@
     $scope.UpdateChild = function () {
         var child = $scope.child;
         child.ChildhoodId = $.grep($scope.nums, function (e) { return e.Number == $scope.child.ChildhoodNum })[0].Ind;
-        var getData = crudService.sendRequest("post", "/Child/UpdateChild", { child: child });
+        var getData = crudChildService.UpdateChild(child);
         getData.then(function (msg) {
             if ($scope.childhoodNum)
                 $scope.GetChildrenList(parseInt($scope.childhoodNum));
@@ -130,7 +130,7 @@
     };
 
     $scope.DeleteChild = function (child) {
-        var getData = crudService.sendRequest("post", "/Child/DeleteChild", { id: child.Ind });
+        var getData = crudChildService.DeleteChild(child.Ind);
         getData.then(function (msg) {
             alert(msg.data);
             $scope.divEdit = false;
