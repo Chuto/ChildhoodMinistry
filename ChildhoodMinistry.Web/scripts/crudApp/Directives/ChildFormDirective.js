@@ -1,7 +1,7 @@
 ﻿app.directive("dirChildForm", function () {
     return {
         replace: false,
-        restrict: "A",
+        restrict: "E",
         scope: {
             child: "=",
             nums: "=",

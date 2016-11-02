@@ -1,7 +1,7 @@
 ﻿app.directive("dirChildList", function () {
     return {
         replace: false,
-        restrict: "A",
+        restrict: "E",
         scope: {
             children: "=",
             onEdit: "&",

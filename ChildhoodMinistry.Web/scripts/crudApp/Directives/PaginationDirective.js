@@ -1,7 +1,7 @@
 ﻿app.directive("dirPagination", function () {
     return {
         replace: false,
-        restrict: "A",
+        restrict: "E",
         scope: {
             setPage: "&",
             currentPage: "=",

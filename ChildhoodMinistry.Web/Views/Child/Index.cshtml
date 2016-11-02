@@ -3,17 +3,17 @@
 }
 <div ng-controller="ChildCRUDCtrl">
     <div>
-        <div dir-child-list children="children" on-edit="EditChild(child)" on-delete="DeleteChild(id)" />
+        <dir-child-list children="children" on-edit="EditChild(child)" on-delete="DeleteChild(id)" />
     </div>
     <div ng-if="ready">
-        <div dir-pagination set-page="setPage(page)" current-page="currentPage" total-pages="totalPages"/>
+        <dir-pagination set-page="setPage(page)" current-page="currentPage" total-pages="totalPages"/>
     </div>
 
-    <span ng-click="AddChildDiv()" class="btn btn-default">Добавить ребёнка</span>
+    <button ng-click="AddChildDiv()" class="btn btn-default">Добавить ребёнка</button>
     <div ng-show="divEdit" ng-cloak>
         <div>
-            <div dir-child-form child="child" confirm="confirm()" nums="nums"></div>
-            <input type="button" ng-click="Cancel()" class="btn btn-danger" value="Отменить" />
+            <dir-child-form child="child" confirm="confirm()" nums="nums"/>
         </div>
+        <input type="button" ng-click="Cancel()" class="btn btn-danger" value="Отменить" />
     </div>
 </div>
