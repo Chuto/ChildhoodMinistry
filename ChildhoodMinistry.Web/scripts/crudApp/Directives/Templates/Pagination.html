@@ -1,19 +1,19 @@
 ﻿<div class="container" ng-cloak="true">
-    <ul ng-if="pager.pages.length" class="pagination">
-        <li ng-class="{disabled:pager.currentPage === 1}">
-            <a ng-click="setPage(1)">First</a>
+    <ul ng-if="pages.length" class="pagination">
+        <li ng-class="{disabled:currentPage === 1}">
+            <a ng-click="LoadPage(1)">First</a>
         </li>
-        <li ng-class="{disabled:pager.currentPage === 1}">
-            <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+        <li ng-class="{disabled:currentPage === 1}">
+            <a ng-click="LoadPage(currentPage - 1)">Previous</a>
         </li>
-        <li ng-repeat="page in pager.pages" ng-class="{active:pager.currentPage === page}">
-            <a ng-click="setPage(page)">{{page}}</a>
+        <li ng-repeat="page in pages" ng-class="{active:currentPage === page}">
+            <a ng-click="LoadPage(page)">{{page}}</a>
         </li>
-        <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
-            <a ng-click="setPage(pager.currentPage + 1)">Next</a>
+        <li ng-class="{disabled:currentPage === totalPages}">
+            <a ng-click="LoadPage(currentPage + 1)">Next</a>
         </li>
-        <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
-            <a ng-click="setPage(pager.totalPages)">Last</a>
+        <li ng-class="{disabled:currentPage === totalPages}">
+            <a ng-click="LoadPage(totalPages)">Last</a>
         </li>
     </ul>
 </div>    

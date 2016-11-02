@@ -5,8 +5,8 @@
     <div>
         <div dir-child-list children="children" edit-func="EditChild" delete-func="DeleteChild" />
     </div>
-    <div>
-        <div dir-pagination load-page="setPage" page="pager"/>
+    <div ng-if="ready">
+        <div dir-pagination set-page="setPage(page)" current-page="currentPage" total-pages="totalPages"/>
     </div>
 
     <span ng-click="AddChildDiv()" class="btn btn-default">Добавить ребёнка</span>
