@@ -3,7 +3,7 @@
         replace: false,
         restrict: "E",
         scope: {
-            setPage: "&",
+            loadPage: "&",
             currentPage: "=",
             totalPages: "="
         },
@@ -29,8 +29,8 @@
 
             $scope.pages = _.range(startPage, endPage + 1);
 
-            $scope.LoadPage = function (num) {
-                $scope.setPage({ page: num })
+            $scope.getPage = function (num) {
+                $scope.loadPage({ page: num })
             };
         }
     };

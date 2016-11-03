@@ -1,6 +1,6 @@
 ﻿app.service("crudChildService", function ($http) {
 
-    this.GetPageOfChild = function (currentPage, pageSize) {
+    this.getPageOfChildren = function (currentPage, pageSize) {
         var response = $http({
             method: "post",
             url: "/Child/GetPage",
@@ -12,7 +12,7 @@
         return response;
     };
 
-    this.GetChildById = function(childId) {
+    this.getChildById = function(childId) {
         var response = $http({
             method: "post",
             url: "/Child/GetChildById",
@@ -23,7 +23,7 @@
         return response;
     };
 
-    this.UpdateChild = function(child) {
+    this.updateChild = function(child) {
         var response = $http({
             method: "post",
             url: "/Child/UpdateChild",
@@ -33,7 +33,7 @@
         return response;
     };
 
-    this.AddChild = function(child) {
+    this.addChild = function(child) {
         var response = $http({
             method: "post",
             url: "/Child/AddChild",
@@ -43,7 +43,7 @@
         return response;
     };
 
-    this.DeleteChild = function(childId) {
+    this.deleteChild = function(childId) {
         var response = $http({
             method: "post",
             url: "/Child/DeleteChild",
@@ -54,7 +54,7 @@
         return response;
     };
 
-    this.GetChildhoods = function () {
+    this.getChildhoods = function () {
         return $http.get("/Childhood/GetChildhoods");
     };
 });

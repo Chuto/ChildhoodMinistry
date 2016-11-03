@@ -11,13 +11,13 @@ namespace ChildhoodMinistry.Web.Builders
             return new ChildViewModel
             {
                 Age = item.Age,
-                Ind = item.Id,
+                Id = item.Id,
                 Name = item.Name,
                 Patronymic = item.Patronymic,
                 Surname = item.Surname,
                 childhood = new ChildhoodInfo
                 {
-                    Ind = item.Childhood.Id,
+                    Id = item.Childhood.Id,
                     Number = item.Childhood.Number
                 }
             };
@@ -28,11 +28,11 @@ namespace ChildhoodMinistry.Web.Builders
             return new Child
             {
                 Age = item.Age,
-                Id = item.Ind,
+                Id = item.Id,
                 Name = item.Name,
                 Patronymic = item.Patronymic,
                 Surname = item.Surname,
-                ChildhoodId = item.childhood.Ind
+                ChildhoodId = item.childhood.Id
             };
         }
     }

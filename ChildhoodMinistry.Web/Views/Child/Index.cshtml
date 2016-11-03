@@ -1,19 +1,19 @@
 ﻿@{
     ViewBag.Title = "NewIndex";
 }
-<div ng-controller="ChildCRUDCtrl">
+<div ng-controller="ChildCrudController">
     <div>
-        <dir-child-list children="children" on-edit="EditChild(child)" on-delete="DeleteChild(id)" />
+        <dir-child-list children="children" on-edit="editChild(child)" on-delete="deleteChild(child)" />
     </div>
-    <div ng-if="ready">
-        <dir-pagination set-page="setPage(page)" current-page="currentPage" total-pages="totalPages"/>
+    <div ng-if="paginationLoad">
+        <dir-pagination load-page="loadPage(page)" current-page="currentPage" total-pages="totalPages"/>
     </div>
 
-    <button ng-click="AddChildDiv()" class="btn btn-default">Добавить ребёнка</button>
-    <div ng-show="divEdit" ng-cloak>
+    <button ng-click="newChild()" class="btn btn-default">Добавить ребёнка</button>
+    <div ng-show="showForm" ng-cloak>
         <div>
-            <dir-child-form child="child" confirm="confirm()" nums="nums"/>
+            <dir-child-form child="child" form-action="formAction()" childhoods="childhoods"/>
         </div>
-        <input type="button" ng-click="Cancel()" class="btn btn-danger" value="Отменить" />
+        <input type="button" ng-click="closeForm()" class="btn btn-danger" value="Отменить" />
     </div>
 </div>

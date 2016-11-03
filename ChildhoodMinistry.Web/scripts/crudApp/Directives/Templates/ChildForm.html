@@ -1,4 +1,4 @@
-﻿<form name="childForm" class="elegant-aero" ng-submit="confirm()" novalidate>
+﻿<form name="childForm" class="elegant-aero" ng-submit="formAction()" novalidate>
     <label>Фамилия</label>
     <input type="text" name="childSurname" ng-model="child.Surname" ng-pattern="/^[А-я]{2,}$/" required/>
     <div ng-show="childForm.childSurname.$invalid && !childForm.childSurname.$pristine">
@@ -29,7 +29,7 @@
 
     <label>Номер детсада</label>
     <input type="text" name="childChildhoodnum" ng-model="child.childhood.Number" disabled="disabled"/>
-    <select name="childhood" ng-options="num as num.Number for num in nums" ng-model="child.childhood" required></select>
+    <select name="childhood" ng-options="childhood as childhood.Number for childhood in childhoods" ng-model="child.childhood" required></select>
     <div ng-show="childForm.childChildhoodnum.$invalid && !childForm.childChildhoodnum.$pristine">
         <div ng-show="childForm.childChildhoodnum.$error.required">Обязательное поле. </div>
     </div>

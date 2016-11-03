@@ -4,8 +4,8 @@
         restrict: "E",
         scope: {
             child: "=",
-            nums: "=",
-            confirm: "&"
+            childhoods: "=",
+            formAction: "&"
         },
         templateUrl: "/scripts/crudApp/Directives/Templates/ChildForm.html"
     };

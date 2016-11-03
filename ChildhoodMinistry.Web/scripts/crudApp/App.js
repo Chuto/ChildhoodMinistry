@@ -3,4 +3,4 @@
        return $window._;
    }]);
 
-var app = angular.module("mvcCRUDApp", ["lodash"]);
+var app = angular.module("mvcCrudApp", ["lodash"]);

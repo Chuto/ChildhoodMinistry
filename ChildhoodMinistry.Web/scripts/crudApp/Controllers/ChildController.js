@@ -1,84 +1,84 @@
-﻿app.controller("ChildCRUDCtrl", function ($window, $scope, crudChildService) {
-    $scope.ready = false;
-    $scope.confirm;
+﻿app.controller("ChildCrudController", function ($scope, crudChildService) {
+    $scope.paginationLoad = false;
 
-    $scope.setPage = function (page) {
+    $scope.loadPage = function (page) {
         if (page < 1 || page > $scope.totalPages) {
             return;
         }
+        $scope.paginationLoad = false;
+        $scope.closeForm();
         var pageSize = 2;
-        $scope.Cancel();
-        var getData = crudChildService.GetPageOfChild(page || 1, pageSize);
+        var getData = crudChildService.getPageOfChildren(page || 1, pageSize);
         getData.then(function (respon) {
             $scope.children = respon.data.Data;
             $scope.currentPage = respon.data.Page.CurrentPage;
             $scope.totalPages = respon.data.Page.TotalPages;
-            $scope.ready = true;
+            $scope.paginationLoad = true;
         }, function () {
             alert('Ошибка чтения записи');
         });
     };
 
     function getChildhoods() {
-        var getData = crudChildService.GetChildhoods();
-        getData.then(function (num) {
-            $scope.nums = num.data;
+        var getData = crudChildService.getChildhoods();
+        getData.then(function (childhoods) {
+            $scope.childhoods = childhoods.data;
         }, function () {
             alert('Ошибка чтения записи');
         });
     }
 
-    $scope.EditChild = function (child) {
-        $scope.confirm = $scope.UpdateChild;
+    $scope.editChild = function (child) {
+        $scope.formAction = $scope.updateChild;
         $scope.child = angular.copy(child);
-        $scope.divEdit = true;
+        $scope.showForm = true;
         getChildhoods();
     };
 
-    $scope.AddChild = function () {
-        var getData = crudChildService.AddChild($scope.child);
+    $scope.addChild = function () {
+        var getData = crudChildService.addChild($scope.child);
         getData.then(function (msg) {
-            $window.location.href = '/Child';
+            $scope.loadPage(1);
             alert(msg.data);
-            $scope.Cancel();
+            $scope.closeForm();
         }, function () {
             alert('Ошибка обновления записи');
         });
     };
 
-    $scope.UpdateChild = function () {
-        var getData = crudChildService.UpdateChild($scope.child);
+    $scope.updateChild = function () {
+        var getData = crudChildService.updateChild($scope.child);
         getData.then(function (msg) {
-            $window.location.href = '/Child';
+            $scope.loadPage(1);
             alert(msg.data);
-            $scope.Cancel();
+            $scope.closeForm();
         }, function () {
             alert('Ошибка добавления записи');
         });
     };
 
-    $scope.AddChildDiv = function () {
-        $scope.confirm = $scope.AddChild;
+    $scope.newChild = function () {
+        $scope.formAction = $scope.addChild;
         $scope.child = {};
-        $scope.divEdit = true;
+        $scope.showForm = true;
         getChildhoods();
     };
 
-    $scope.DeleteChild = function (child) {
-        var getData = crudChildService.DeleteChild(child.Ind);
+    $scope.deleteChild = function (child) {
+        var getData = crudChildService.deleteChild(child.Id);
         getData.then(function (msg) {
             alert(msg.data);
-            $scope.Cancel();
-            $window.location.href = '/Child';
+            $scope.closeForm();
+            $scope.loadPage(1);
         }, function () {
             alert('Ошибка удаления записи');
         });
     };
 
-    $scope.Cancel = function () {
-        $scope.divEdit = false;
+    $scope.closeForm = function () {
+        $scope.showForm = false;
     };
 
-    $scope.setPage(1);
+    $scope.loadPage(1);
 });
 

@@ -4,7 +4,7 @@ namespace ChildhoodMinistry.Web.Model
 {
     public class ChildViewModel
     {
-        public int Ind { get; set; }
+        public int Id { get; set; }
         [Required(AllowEmptyStrings = false)]
         [RegularExpression("[А-я]{2,}",ErrorMessage = "Имя: Кириллица не короче двух символов")]
         public string Name { get; set; }
@@ -21,7 +21,7 @@ namespace ChildhoodMinistry.Web.Model
 
     public class ChildhoodInfo
     {
-        public int Ind { get; set; }
+        public int Id { get; set; }
         public int Number { get; set; }
     }
 }

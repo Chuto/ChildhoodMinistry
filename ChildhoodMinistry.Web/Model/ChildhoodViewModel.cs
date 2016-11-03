@@ -4,7 +4,7 @@ namespace ChildhoodMinistry.Web.Model
 {
     public class ChildhoodViewModel
     {
-        public int Ind { get; set; }
+        public int Id { get; set; }
         [Required]
         public int Number { get; set; }
         [Required(AllowEmptyStrings = false)]
