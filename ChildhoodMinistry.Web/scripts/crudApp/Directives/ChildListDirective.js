@@ -7,6 +7,9 @@
             onEdit: "&",
             onDelete: "&"
         },
+        controller: function() {},
+        controllerAs: "vmList",
+        bindToController: true,
         templateUrl: "/scripts/crudApp/Directives/Templates/ChildList.html"
     };
 });

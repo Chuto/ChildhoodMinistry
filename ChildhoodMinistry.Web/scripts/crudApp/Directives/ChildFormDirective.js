@@ -7,6 +7,9 @@
             childhoods: "=",
             formAction: "&"
         },
+        controller: function () { },
+        controllerAs: "vmForm",
+        bindToController: true,
         templateUrl: "/scripts/crudApp/Directives/Templates/ChildForm.html"
     };
 });

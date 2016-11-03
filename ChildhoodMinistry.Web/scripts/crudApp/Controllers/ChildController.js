@@ -1,4 +1,4 @@
-﻿app.controller("ChildCrudController", function (crudChildService) {
+﻿app.controller("ChildCrudController", ["crudChildService", function (crudChildService) {
     var vm = this;
     vm.paginationLoad = false;
 
@@ -81,5 +81,5 @@
     };
 
     vm.loadPage(1);
-});
+}]);
 

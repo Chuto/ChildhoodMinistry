@@ -1,35 +1,35 @@
-﻿<form name="childForm" class="elegant-aero" ng-submit="formAction()" novalidate>
+﻿<form name="childForm" class="elegant-aero" ng-submit="vmForm.formAction()" novalidate>
     <label>Фамилия</label>
-    <input type="text" name="childSurname" ng-model="child.Surname" ng-pattern="/^[А-я]{2,}$/" required/>
+    <input type="text" name="childSurname" ng-model="vmForm.child.Surname" ng-pattern="/^[А-я]{2,}$/" required/>
     <div ng-show="childForm.childSurname.$invalid && !childForm.childSurname.$pristine">
         <div ng-show="childForm.childSurname.$error.required">Обязательное поле. </div>
         <div ng-show="childForm.childSurname.$error.pattern">Кириллица не короче двух символов. </div>
     </div>
 
     <label>Имя</label>
-    <input type="text" name="childName" ng-model="child.Name" ng-pattern="/^[А-я]{2,}$/" required/>
+    <input type="text" name="childName" ng-model="vmForm.child.Name" ng-pattern="/^[А-я]{2,}$/" required/>
     <div ng-show="childForm.childName.$invalid && !childForm.childName.$pristine">
         <div ng-show="childForm.childName.$error.required">Обязательное поле. </div>
         <div ng-show="childForm.childName.$error.pattern">Кириллица не короче двух символов. </div>
     </div>
 
     <label>Отчество</label>
-    <input type="text" name="childPatronymic" ng-model="child.Patronymic" ng-pattern="/^[А-я]{2,}$/" required/>
+    <input type="text" name="childPatronymic" ng-model="vmForm.child.Patronymic" ng-pattern="/^[А-я]{2,}$/" required/>
     <div ng-show="childForm.childPatronymic.$invalid && !childForm.childPatronymic.$pristine">
         <div ng-show="childForm.childPatronymic.$error.required">Обязательное поле. </div>
         <div ng-show="childForm.childPatronymic.$error.pattern">Кириллица не короче двух символов. </div>
     </div>
 
     <label>Возраст</label>
-    <input type="text" name="childAge" ng-model="child.Age" ng-pattern="/^[3-9]$/" required/>
+    <input type="text" name="childAge" ng-model="vmForm.child.Age" ng-pattern="/^[3-9]$/" required/>
     <div ng-show="childForm.childAge.$invalid && !childForm.childAge.$pristine">
         <div ng-show="childForm.childAge.$error.required">Обязательное поле. </div>
         <div ng-show="childForm.childAge.$error.pattern">Возраст должен быть от 3 до 9 лет. </div>
     </div>
 
     <label>Номер детсада</label>
-    <input type="text" name="childChildhoodnum" ng-model="child.childhood.Number" disabled="disabled"/>
-    <select name="childhood" ng-options="childhood as childhood.Number for childhood in childhoods" ng-model="child.childhood" required></select>
+    <input type="text" name="childChildhoodnum" ng-model="vmForm.child.childhood.Number" disabled="disabled"/>
+    <select name="childhood" ng-options="childhood as childhood.Number for childhood in vmForm.childhoods" ng-model="vmForm.child.childhood" required></select>
     <div ng-show="childForm.childChildhoodnum.$invalid && !childForm.childChildhoodnum.$pristine">
         <div ng-show="childForm.childChildhoodnum.$error.required">Обязательное поле. </div>
     </div>

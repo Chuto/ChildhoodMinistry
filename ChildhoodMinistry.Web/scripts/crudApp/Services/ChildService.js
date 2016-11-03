@@ -1,4 +1,4 @@
-﻿app.service("crudChildService", function ($http) {
+﻿app.service("crudChildService", ["$http", function ($http) {
 
     this.getPageOfChildren = function (currentPage, pageSize) {
         var response = $http({
@@ -57,4 +57,4 @@
     this.getChildhoods = function () {
         return $http.get("/Childhood/GetChildhoods");
     };
-});
+}]);

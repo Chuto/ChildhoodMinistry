@@ -6,7 +6,7 @@
         <td>Номер детсада</td>
         <td>Возраст</td>
     </tr>
-    <tr ng-repeat="child in children" ng-cloak>
+    <tr ng-repeat="child in vmList.children" ng-cloak>
         <td>
             {{child.Surname+" "+child.Name+" "+child.Patronymic}}
         </td>
@@ -17,8 +17,8 @@
             {{child.Age}}
         </td>
         <td>
-            <button ng-click="onEdit({child:child})" class="btn btn-primary">Редактировать</button>
-            <button ng-click="onDelete({child:child})" class="btn btn-danger">Удалить</button>
+            <button ng-click="vmList.onEdit({child:child})" class="btn btn-primary">Редактировать</button>
+            <button ng-click="vmList.onDelete({child:child})" class="btn btn-danger">Удалить</button>
         </td>
     </tr>
 </table>

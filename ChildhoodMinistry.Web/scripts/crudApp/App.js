@@ -1,5 +1,5 @@
 ﻿angular.module("lodash", [])
-   .factory('_', ['$window', function ($window) {
+   .factory("_", ['$window', function ($window) {
        return $window._;
    }]);
 
