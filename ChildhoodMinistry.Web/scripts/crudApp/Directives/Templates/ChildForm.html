@@ -28,10 +28,8 @@
     </div>
 
     <label>Номер детсада</label>
-    <input type="text" name="childChildhoodnum" ng-model="child.ChildhoodNum" disabled="disabled" required/>
-    <select ng-model="child.ChildhoodNum">
-        <option ng-repeat="num in nums">{{num.Number}}</option>
-    </select>
+    <input type="text" name="childChildhoodnum" ng-model="child.childhood.Number" disabled="disabled"/>
+    <select name="childhood" ng-options="num as num.Number for num in nums" ng-model="child.childhood" required></select>
     <div ng-show="childForm.childChildhoodnum.$invalid && !childForm.childChildhoodnum.$pristine">
         <div ng-show="childForm.childChildhoodnum.$error.required">Обязательное поле. </div>
     </div>

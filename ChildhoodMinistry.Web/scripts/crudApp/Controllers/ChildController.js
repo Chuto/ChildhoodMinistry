@@ -36,7 +36,6 @@
     };
 
     $scope.AddChild = function () {
-        $scope.child.ChildhoodId = $.grep($scope.nums, function (e) { return e.Number == $scope.child.ChildhoodNum })[0].Ind;
         var getData = crudChildService.AddChild($scope.child);
         getData.then(function (msg) {
             $window.location.href = '/Child';
@@ -48,7 +47,6 @@
     };
 
     $scope.UpdateChild = function () {
-        $scope.child.ChildhoodId = $.grep($scope.nums, function (e) { return e.Number == $scope.child.ChildhoodNum })[0].Ind;
         var getData = crudChildService.UpdateChild($scope.child);
         getData.then(function (msg) {
             $window.location.href = '/Child';

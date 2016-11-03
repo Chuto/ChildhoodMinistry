@@ -16,8 +16,12 @@ namespace ChildhoodMinistry.Web.Model
         public string Patronymic { get; set; }
         [Range(3,10,ErrorMessage = "Возраст: от 3 до 10 лет")]
         public int Age { get; set; }
-        [Required]
-        public int ChildhoodNum { get; set; }    
-        public int ChildhoodId { get; set; }
+        public ChildhoodInfo childhood { get; set; }
+    }
+
+    public class ChildhoodInfo
+    {
+        public int Ind { get; set; }
+        public int Number { get; set; }
     }
 }
