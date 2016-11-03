@@ -64,8 +64,8 @@
         getChildhoods();
     };
 
-    $scope.DeleteChild = function (Ind) {
-        var getData = crudChildService.DeleteChild(Ind);
+    $scope.DeleteChild = function (child) {
+        var getData = crudChildService.DeleteChild(child.Ind);
         getData.then(function (msg) {
             alert(msg.data);
             $scope.Cancel();
