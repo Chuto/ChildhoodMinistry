@@ -11,7 +11,7 @@ namespace ChildhoodMinistry.Web.Builders
             return new ChildhoodViewModel
             {
                 Adress = item.Adress,
-                Ind = item.Id,
+                Id = item.Id,
                 Number = item.Number
             };
         }
@@ -21,7 +21,7 @@ namespace ChildhoodMinistry.Web.Builders
             return new Childhood
             {
                 Adress = item.Adress,
-                Id = item.Ind,
+                Id = item.Id,
                 Number = item.Number
             };
         }

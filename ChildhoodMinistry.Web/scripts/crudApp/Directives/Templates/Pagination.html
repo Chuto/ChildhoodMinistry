@@ -1,0 +1,19 @@
+﻿<div class="container" ng-cloak="true">
+    <ul ng-if="vmPage.pages.length" class="pagination">
+        <li ng-class="{disabled:vmPage.currentPage === 1}">
+            <a ng-click="vmPage.getPage(1)">Первая</a>
+        </li>
+        <li ng-class="{disabled:vmPage.currentPage === 1}">
+            <a ng-click="vmPage.getPage(vmPage.currentPage - 1)">Предыдущая</a>
+        </li>
+        <li ng-repeat="page in vmPage.pages" ng-class="{active:vmPage.currentPage === page}">
+            <a ng-click="vmPage.getPage(page)">{{page}}</a>
+        </li>
+        <li ng-class="{disabled:vmPage.currentPage === vmPage.totalPages}">
+            <a ng-click="vmPage.getPage(vmPage.currentPage + 1)">Следующая</a>
+        </li>
+        <li ng-class="{disabled:vmPage.currentPage === vmPage.totalPages}">
+            <a ng-click="vmPage.getPage(vmPage.totalPages)">Последняя</a>
+        </li>
+    </ul>
+</div>    
