@@ -32,8 +32,4 @@
         });
         return response;
     };
-
-    this.getChildhoods = function () {
-        return $http.get("/Childhood/GetChildhoods");
-    };
 }]);

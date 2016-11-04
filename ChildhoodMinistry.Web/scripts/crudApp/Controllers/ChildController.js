@@ -1,4 +1,4 @@
-﻿app.controller("ChildCrudController", ["crudChildService", function (crudChildService) {
+﻿app.controller("ChildCrudController", ["crudChildService", "crudChildhoodService", function (crudChildService, crudChildhoodService) {
     var vm = this;
     vm.paginationLoad = false;
 
@@ -21,7 +21,7 @@
     };
 
     function getChildhoods() {
-        var getData = crudChildService.getChildhoods();
+        var getData = crudChildhoodService.getChildhoods();
         getData.then(function (childhoods) {
             vm.childhoods = childhoods.data;
         }, function () {
