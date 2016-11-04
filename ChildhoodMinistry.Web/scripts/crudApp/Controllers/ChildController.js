@@ -30,7 +30,7 @@
     }
 
     this.editChild = function (child) {
-        vm.formAction = this.updateChild;
+        vm.formAction = vm.updateChild;
         vm.child = angular.copy(child);
         vm.showForm = true;
         getChildhoods();
