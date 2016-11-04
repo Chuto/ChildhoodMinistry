@@ -1,6 +1,6 @@
-﻿app.directive("dirPagination", function (_) {
+﻿app.directive("dirPagination", function () {
 
-    var PagingController = function () {
+    var PagingController = function (_) {
         var vmPage = this;
         var startPage, endPage;
 

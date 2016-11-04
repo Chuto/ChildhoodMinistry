@@ -1,55 +1,34 @@
 ﻿app.service("crudChildService", ["$http", function ($http) {
 
     this.getPageOfChildren = function (currentPage, pageSize) {
-        var response = $http({
-            method: "post",
-            url: "/Child/GetPage",
-            params: {
+        var response = $http.post("/Child/GetPage", {
                 page: currentPage, 
                 pageSize: pageSize
             }
-        });
+        );
         return response;
     };
 
     this.getChildById = function(childId) {
-        var response = $http({
-            method: "post",
-            url: "/Child/GetChildById",
-            params: {
-                id: childId
-            }
+        var response = $http.post("/Child/GetChildById", {
+            id: childId
         });
         return response;
     };
 
     this.updateChild = function(child) {
-        var response = $http({
-            method: "post",
-            url: "/Child/UpdateChild",
-            data: JSON.stringify(child),
-            dataType: "json"
-        });
+        var response = $http.post("/Child/UpdateChild", JSON.stringify(child));
         return response;
     };
 
     this.addChild = function(child) {
-        var response = $http({
-            method: "post",
-            url: "/Child/AddChild",
-            data: JSON.stringify(child),
-            dataType: "json"
-        });
+        var response = $http.post("/Child/AddChild", JSON.stringify(child));
         return response;
     };
 
     this.deleteChild = function(childId) {
-        var response = $http({
-            method: "post",
-            url: "/Child/DeleteChild",
-            params: {
-                id: JSON.stringify(childId)
-            }
+        var response = $http.post("/Child/DeleteChild", {
+            Id: childId
         });
         return response;
     };
