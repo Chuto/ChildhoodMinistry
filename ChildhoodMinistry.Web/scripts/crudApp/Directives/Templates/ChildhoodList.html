@@ -1,0 +1,21 @@
+﻿<h2>Список детсадов</h2>
+
+<table class="table table-hover">
+    <tr>
+        <td>Номер детсада</td>
+        <td>Адрес</td>
+    </tr>
+    <tr ng-repeat="childhood in vmList.childhoods" ng-cloak>
+        <td>
+            {{childhood.Number}}
+        </td>
+        <td>
+            {{childhood.Adress}}
+        </td>
+        <td>
+            <span ng-click="vmList.getChildrenList({childhood:childhood})" class="btn btn-primary">Список детей</span>
+            <span ng-click="vmList.onEdit({childhood:childhood})" class="btn btn-primary">Редактировать</span>
+            <span ng-click="vmList.onDelete({childhood:childhood})" class="btn btn-danger">Удалить</span>
+        </td>
+    </tr>
+</table>
