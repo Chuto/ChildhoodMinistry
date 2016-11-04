@@ -190,7 +190,6 @@
     <Content Include="scripts\Angular.js" />
     <Content Include="scripts\crudApp\Controllers\ChildController.js" />
     <Content Include="scripts\crudApp\Controllers\ChildhoodController.js" />
-    <Content Include="scripts\crudApp\Controllers\PaginationController.js" />
     <Content Include="scripts\crudApp\Directives\ChildFormDirective.js" />
     <Content Include="scripts\crudApp\Directives\ChildListDirective.js" />
     <Content Include="scripts\crudApp\Directives\PaginationDirective.js" />
