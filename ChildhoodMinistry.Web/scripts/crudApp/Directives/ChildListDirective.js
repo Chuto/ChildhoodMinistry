@@ -4,6 +4,7 @@
         restrict: "E",
         scope: {
             children: "=",
+            crud: "=",
             onEdit: "&",
             onDelete: "&"
         },

@@ -3,7 +3,7 @@
 }
 <div ng-controller="ChildCrudController as childCrud">
     <div>
-        <dir-child-list children="childCrud.children" on-edit="childCrud.editChild(child)" on-delete="childCrud.deleteChild(child)" />
+        <dir-child-list children="childCrud.children" on-edit="childCrud.editChild(child)" on-delete="childCrud.deleteChild(child)" crud="true" />
     </div>
     <div ng-if="childCrud.paginationLoad">
         <dir-pagination load-page="childCrud.loadPage(page)" current-page="childCrud.currentPage" total-pages="childCrud.totalPages"/>

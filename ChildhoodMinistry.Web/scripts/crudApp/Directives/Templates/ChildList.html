@@ -16,7 +16,7 @@
         <td>
             {{child.Age}}
         </td>
-        <td>
+        <td ng-show="vmList.crud">
             <button ng-click="vmList.onEdit({child:child})" class="btn btn-primary">Редактировать</button>
             <button ng-click="vmList.onDelete({child:child})" class="btn btn-danger">Удалить</button>
         </td>
