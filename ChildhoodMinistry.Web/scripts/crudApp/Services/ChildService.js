@@ -17,12 +17,12 @@
     };
 
     this.updateChild = function(child) {
-        var response = $http.post("/Child/UpdateChild", JSON.stringify(child));
+        var response = $http.post("/Child/UpdateChild", child);
         return response;
     };
 
     this.addChild = function(child) {
-        var response = $http.post("/Child/AddChild", JSON.stringify(child));
+        var response = $http.post("/Child/AddChild", child);
         return response;
     };
 
