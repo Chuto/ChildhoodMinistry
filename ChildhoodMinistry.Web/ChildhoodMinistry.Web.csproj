@@ -191,9 +191,11 @@
     <Content Include="scripts\crudApp\Controllers\ChildController.js" />
     <Content Include="scripts\crudApp\Controllers\ChildhoodController.js" />
     <Content Include="scripts\crudApp\Directives\ChildFormDirective.js" />
+    <Content Include="scripts\crudApp\Directives\ChildhoodFormDirective.js" />
     <Content Include="scripts\crudApp\Directives\ChildListDirective.js" />
     <Content Include="scripts\crudApp\Directives\PaginationDirective.js" />
     <Content Include="scripts\crudApp\Directives\Templates\ChildForm.html" />
+    <Content Include="scripts\crudApp\Directives\Templates\ChildhoodForm.html" />
     <Content Include="scripts\crudApp\Directives\Templates\ChildList.html" />
     <Content Include="scripts\crudApp\Directives\Templates\Pagination.html" />
     <Content Include="scripts\crudApp\Services\ChildhoodService.js" />
