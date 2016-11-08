@@ -5,7 +5,7 @@
         scope: {
             child: "=",
             childhoods: "=",
-            formAction: "&"
+            onAction: "&"
         },
         controller: function () { },
         controllerAs: "vmForm",

@@ -6,7 +6,7 @@
             childhoods: "=",
             onEdit: "&",
             onDelete: "&",
-            getChildrenList: "&"
+            onGetChildrenList: "&"
         },
         controller: function () { },
         controllerAs: "vmList",

@@ -4,16 +4,16 @@
 
 <div ng-controller="ChildhoodCrudController as childhoodCrud">
     <div>
-        <dir-childhood-list childhoods="childhoodCrud.childhoods" on-edit="childhoodCrud.editChildhood(childhood)" on-delete="childhoodCrud.deleteChildhood(childhood)" get-children-list="childhoodCrud.getChildrenList(childhood)" />
+        <dir-childhood-list childhoods="childhoodCrud.childhoods" on-edit="childhoodCrud.editChildhood(childhood)" on-delete="childhoodCrud.deleteChildhood(childhood)" on-get-children-list="childhoodCrud.getChildrenList(childhood)" />
     </div>
     <div ng-if="childhoodCrud.paginationLoad">
-        <dir-pagination load-page="childhoodCrud.loadPage(page)" current-page="childhoodCrud.currentPage" total-pages="childhoodCrud.totalPages" />
+        <dir-pagination on-load-page="childhoodCrud.loadPage(page)" current-page="childhoodCrud.currentPage" total-pages="childhoodCrud.totalPages" />
     </div>
 
     <button ng-click="childhoodCrud.newChildhood()" class="btn btn-default" ng-cloak>Добавить детсад</button>
     <div ng-show="childhoodCrud.showForm" ng-cloak>
         <div>
-            <dir-childhood-form childhood="childhoodCrud.childhood" form-action="childhoodCrud.formAction()"></>
+            <dir-childhood-form childhood="childhoodCrud.childhood" on-action="childhoodCrud.formAction()"></>
         </div>
         <input type="button" ng-click="childhoodCrud.closeForm()" class="btn btn-danger" value="Отменить" />
     </div>

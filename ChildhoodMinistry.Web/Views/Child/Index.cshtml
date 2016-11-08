@@ -6,13 +6,13 @@
         <dir-child-list children="childCrud.children" on-edit="childCrud.editChild(child)" on-delete="childCrud.deleteChild(child)" crud="true" />
     </div>
     <div ng-if="childCrud.paginationLoad">
-        <dir-pagination load-page="childCrud.loadPage(page)" current-page="childCrud.currentPage" total-pages="childCrud.totalPages"/>
+        <dir-pagination on-load-page="childCrud.loadPage(page)" current-page="childCrud.currentPage" total-pages="childCrud.totalPages"/>
     </div>
 
     <button ng-click="childCrud.newChild()" class="btn btn-default">Добавить ребёнка</button>
     <div ng-show="childCrud.showForm" ng-cloak>
         <div>
-            <dir-child-form child="childCrud.child" form-action="childCrud.formAction()" childhoods="childCrud.childhoods"/>
+            <dir-child-form child="childCrud.child" on-action="childCrud.formAction()" childhoods="childCrud.childhoods"/>
         </div>
         <input type="button" ng-click="childCrud.closeForm()" class="btn btn-danger" value="Отменить" />
     </div>

@@ -4,7 +4,7 @@
         restrict: "E",
         scope: {
             childhood: "=",
-            formAction: "&"
+            onAction: "&"
         },
         controller: function () { },
         controllerAs: "vmForm",
