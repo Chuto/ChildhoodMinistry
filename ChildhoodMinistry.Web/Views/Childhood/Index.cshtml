@@ -13,7 +13,7 @@
     <button ng-click="childhoodCrud.newChildhood()" class="btn btn-default" ng-cloak>Добавить детсад</button>
     <div ng-show="childhoodCrud.showForm" ng-cloak>
         <div>
-            <dir-childhood-form childhood="childhoodCrud.childhood" on-action="childhoodCrud.formAction()"></>
+            <dir-childhood-form childhood="childhoodCrud.childhood" on-submit="childhoodCrud.formAction()"></>
         </div>
         <input type="button" ng-click="childhoodCrud.closeForm()" class="btn btn-danger" value="Отменить" />
     </div>

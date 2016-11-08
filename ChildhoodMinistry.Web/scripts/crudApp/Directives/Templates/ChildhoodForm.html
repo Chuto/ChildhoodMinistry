@@ -1,4 +1,4 @@
-﻿<form name="childhoodForm" class="elegant-aero" ng-submit="vmForm.onAction()" novalidate>
+﻿<form name="childhoodForm" class="elegant-aero" ng-submit="vmForm.onSubmit()" novalidate>
     <label>Номер детсада</label>
     <input type="text" name="childhoodNumber" ng-model="vmForm.childhood.Number" ng-pattern="/^\d+$/" required />
     <div ng-show="childhoodForm.childhoodNumber.$invalid && !childhoodForm.childhoodNumber.$pristine">
