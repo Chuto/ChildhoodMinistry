@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Web.Mvc;
+using System.Web.Routing;
 using ChildhoodMinistry.Contracts;
 using ChildhoodMinistry.DAL;
 using ChildhoodMinistry.Web.Interface;
@@ -9,31 +9,31 @@ using Ninject;
 using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
 
+
 namespace ChildhoodMinistry.Web.Dependency
 {
-    public class NinjectResolver : IDependencyResolver
+    public class NinjectControllerFactory : DefaultControllerFactory
     {
-        private readonly IKernel _kernel;
-
-        public NinjectResolver(IKernel kernelParam)
+        private IKernel Kernel { get; }
+        public NinjectControllerFactory(IKernel kernel)
         {
-            _kernel = kernelParam;
+            Kernel = kernel;
             AddBindings();
         }
 
-        public object GetService(Type serviceType)
+        protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
-            return _kernel.TryGet(serviceType);
-        }
+            IController controller = null;
 
-        public IEnumerable<object> GetServices(Type serviceType)
-        {
-            return _kernel.GetAll(serviceType);
+            if (controllerType != null)
+                controller = (IController)Kernel.Get(controllerType);
+
+            return controller;
         }
 
         private void AddBindings()
         {
-            _kernel.Bind(convention => convention
+            Kernel.Bind(convention => convention
                 .FromAssembliesMatching("ChildhoodMinistry.*")
                 .SelectAllClasses()
                 .InheritedFrom(typeof(IRepository<>))
@@ -41,7 +41,7 @@ namespace ChildhoodMinistry.Web.Dependency
                 .Configure(obj => obj.InTransientScope())
             );
 
-            _kernel.Bind(convention => convention
+            Kernel.Bind(convention => convention
                 .FromAssembliesMatching("ChildhoodMinistry.*")
                 .SelectAllClasses()
                 .InheritedFrom(typeof(IModelBuilder<,>))
@@ -49,7 +49,7 @@ namespace ChildhoodMinistry.Web.Dependency
                 .Configure(obj => obj.InTransientScope())
             );
 
-            _kernel.Bind(convention => convention
+            Kernel.Bind(convention => convention
                 .FromAssembliesMatching("ChildhoodMinistry.*")
                 .SelectAllClasses()
                 .Where(t => t.Name.EndsWith("Service"))
@@ -57,7 +57,7 @@ namespace ChildhoodMinistry.Web.Dependency
                 .Configure(obj => obj.InTransientScope())
             );
 
-            _kernel.Bind<DbContext>().To<ChildhoodMinistryContext>().InRequestScope();
+            Kernel.Bind<DbContext>().To<ChildhoodMinistryContext>().InRequestScope();
         }
     }
 }
