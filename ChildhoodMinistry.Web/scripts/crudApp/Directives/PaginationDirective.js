@@ -23,7 +23,7 @@
         vmPage.pages = _.range(startPage, endPage + 1);
 
         vmPage.getPage = function (num) {
-            vmPage.loadPage({ page: num })
+            vmPage.onLoadPage({ page: num })
         };
     };
 
@@ -31,7 +31,7 @@
         replace: false,
         restrict: "E",
         scope: {
-            loadPage: "&",
+            onLoadPage: "&",
             currentPage: "=",
             totalPages: "="
         },

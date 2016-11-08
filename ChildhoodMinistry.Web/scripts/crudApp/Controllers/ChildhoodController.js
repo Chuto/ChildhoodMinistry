@@ -1,141 +1,87 @@
-﻿app.controller("ChildhoodCRUDCtrl", function ($scope, crudService) {
-
-    $scope.pager = {};
-
-    $scope.setPage = function (page) {
-        if (page < 1 || page > $scope.pager.totalPages) {
-            page = 1;
+﻿app.controller("ChildhoodCrudController", ["crudChildhoodService", function (crudChildhoodService) {
+    var vm = this;
+    vm.paginationLoad = false;
+    
+    vm.loadPage = function (page) {
+        if (page < 1 || page > vm.totalPages) {
+            return;
         }
-        $scope.divEdit = false;
-        $scope.divList = false;
-        var currentPage = page || 1;
+        vm.paginationLoad = false;
+        vm.closeForm();
         var pageSize = 2;
-
-        var getData = crudService.sendRequest("post", "/Childhood/GetPage", { page: currentPage, pageSize: pageSize });
+        var getData = crudChildhoodService.getPageOfChildhoods(page || 1, pageSize);
         getData.then(function (respon) {
-            $scope.childhoods = respon.data.Data;
-            currentPage = respon.data.Page.CurrentPage;
-            pageSize = respon.data.Page.PageSize;
-            var totalItems = respon.data.Page.TotalItems;
-            var totalPages = respon.data.Page.TotalPages;
-
-            var startPage, endPage;
-
-            if (totalPages <= 10) {
-                startPage = 1;
-                endPage = totalPages;
-            } else {
-                if (currentPage <= 6) {
-                    startPage = 1;
-                    endPage = 10;
-                } else if (currentPage + 4 >= totalPages) {
-                    startPage = totalPages - 9;
-                    endPage = totalPages;
-                } else {
-                    startPage = currentPage - 5;
-                    endPage = currentPage + 4;
-                }
-            }
-
-            var startIndex = (currentPage - 1) * pageSize;
-            var endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
-            var pages = window._.range(startPage, endPage + 1);
-
-            $scope.pager = {
-                totalItems: totalItems,
-                currentPage: currentPage,
-                pageSize: pageSize,
-                totalPages: totalPages,
-                startPage: startPage,
-                endPage: endPage,
-                startIndex: startIndex,
-                endIndex: endIndex,
-                pages: pages
-            };
+            vm.childhoods = respon.data.Data;
+            vm.currentPage = respon.data.Page.CurrentPage;
+            vm.totalPages = respon.data.Page.TotalPages;
+            vm.paginationLoad = true;
         }, function () {
             alert("Ошибка чтения записи");
         });
     };
 
-    $scope.setPage(1);
-
-    $scope.GetChildrenList = function (childhoodId) {
-        var getData = crudService.sendRequest("post", "/Child/GetChildByChildhoodNum", { id: childhoodId });
+    vm.getChildrenList = function (childhood) {
+        var getData = crudChildhoodService.getChildrenList(childhood.Id);
         getData.then(function (childrenList) {
-            $scope.children = childrenList.data;
-            $scope.childhoodNum = childhoodId;
-
-            $scope.divList = true;
-            $scope.divEdit = false;
-
+            vm.children = childrenList.data;
+            vm.childrenList = true;
+            vm.showForm = false;
         }, function () {
             alert('Ошибка чтения записи');
         });
     };
 
-    $scope.EditChildhood = function (id) {
-        $scope.edit = true;
-        $scope.save = false;
-        var getData = crudService.sendRequest("post","/Childhood/GetChildhoodById", { id: id });
-        getData.then(function (childhood) {
-            $scope.childhood = childhood.data;
-            $scope.Action = "Редактирование";
-            $scope.divEdit = true;
-            $scope.divList = false;
-        }, function () {
-            alert('Ошибка чтения записи');
-        });
+    vm.editChildhood = function (childhood) {
+        vm.formAction = vm.updateChildhood;
+        vm.childhood = angular.copy(childhood);
+        vm.showForm = true;
+        vm.childrenList = false;
     };
 
-    $scope.AddChildhood = function () {
-        var childhood = $scope.childhood;
-        var getData = crudService.sendRequest("post", "/Childhood/AddChildhood", { childhood: childhood });
+    vm.addChildhood = function () {
+        var getData = crudChildhoodService.addChildhood(vm.childhood);
         getData.then(function (msg) {            
             alert(msg.data);
-            $scope.setPage(1);
-            $scope.divEdit = false;
+            vm.loadPage(1);
+            vm.closeForm();
         }, function () {
             alert("Ошибка добавления записи");
         });
-        $scope.save = false;
     };
 
-    $scope.UpdateChildhood = function () {
-        var childhood = $scope.childhood;
-        var getData = crudService.sendRequest("post", "/Childhood/UpdateChildhood", { childhood: childhood });
+    vm.updateChildhood = function () {
+        var getData = crudChildhoodService.updateChildhood(vm.childhood);
         getData.then(function (msg) {
             alert(msg.data);
-            $scope.setPage(1);
-            $scope.divEdit = false;
+            vm.loadPage(1);
+            vm.closeForm();
         }, function () {
             alert("Ошибка обновления записи");
         });
-        $scope.edit = false;
     };
 
-    $scope.DeleteChildhood = function (id) {
-        var getData = crudService.sendRequest("post", "/Childhood/DeleteChildhood", { id: id });
+    vm.deleteChildhood = function (childhood) {
+        var getData = crudChildhoodService.deleteChildhood(childhood.Id);
         getData.then(function (msg) {
             alert(msg.data);
-            $scope.divEdit = false;
-            $scope.divList = false;
-            $scope.setPage(1);
+            vm.closeForm();
+            vm.loadPage(1);
         }, function () {
             alert("Ошибка удаления записи");
         });
     };
 
-    $scope.AddChildhoodDiv = function () {
-        $scope.childhood = null;
-        $scope.Action = "Добавление";
-        $scope.save = true;
-        $scope.edit = false;
-        $scope.divEdit = true;
-        $scope.divList = false;
+    vm.newChildhood = function () {
+        vm.formAction = vm.addChildhood;
+        vm.childhood = {};
+        vm.showForm = true;
+        vm.childrenList = false;
     };
 
-    $scope.CancelChildrenList = function () {
-        $scope.divEdit = false;
-        $scope.divList = false;
+    vm.closeForm = function () {
+        vm.showForm = false;
+        vm.childrenList = false;
     };
-});
+
+    vm.loadPage(1);
+}]);

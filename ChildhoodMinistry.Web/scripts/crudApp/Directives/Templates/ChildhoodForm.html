@@ -1,0 +1,19 @@
+﻿<form name="childhoodForm" class="elegant-aero" ng-submit="vmForm.onSubmit()" novalidate>
+    <label>Номер детсада</label>
+    <input type="text" name="childhoodNumber" ng-model="vmForm.childhood.Number" ng-pattern="/^\d+$/" required />
+    <div ng-show="childhoodForm.childhoodNumber.$invalid && !childhoodForm.childhoodNumber.$pristine">
+        <div ng-show="childhoodForm.childhoodNumber.$error.required">Обязательное поле. </div>
+        <div ng-show="childhoodForm.childhoodNumber.$error.pattern">Необходимо ввести число. </div>
+    </div>
+
+    <label>Адрес</label>
+    <input type="text" name="childhoodAdress" ng-model="vmForm.childhood.Adress" ng-pattern="/^[А-я]{2,}\s\d+$/" required />
+    <div ng-show="childhoodForm.childhoodAdress.$invalid && !childhoodForm.childhoodAdress.$pristine">
+        <div ng-show="childhoodForm.childhoodAdress.$error.required">Обязательное поле. </div>
+        <div ng-show="childhoodForm.childhoodAdress.$error.pattern">"Название кириллицей"_"номер". </div>
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary" ng-disabled="childhoodForm.$invalid">Сохранить</button>
+
+</form>

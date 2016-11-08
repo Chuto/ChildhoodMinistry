@@ -1,4 +1,4 @@
-﻿app.controller("ChildCrudController", ["crudChildService", function (crudChildService) {
+﻿app.controller("ChildCrudController", ["crudChildService", "crudChildhoodService", function (crudChildService, crudChildhoodService) {
     var vm = this;
     vm.paginationLoad = false;
 
@@ -21,7 +21,7 @@
     };
 
     function getChildhoods() {
-        var getData = crudChildService.getChildhoods();
+        var getData = crudChildhoodService.getChildhoods();
         getData.then(function (childhoods) {
             vm.childhoods = childhoods.data;
         }, function () {
@@ -30,7 +30,7 @@
     }
 
     this.editChild = function (child) {
-        vm.formAction = this.updateChild;
+        vm.formAction = vm.updateChild;
         vm.child = angular.copy(child);
         vm.showForm = true;
         getChildhoods();
