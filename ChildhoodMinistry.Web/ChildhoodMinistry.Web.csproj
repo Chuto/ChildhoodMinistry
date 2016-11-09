@@ -221,7 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Builders\ChildBuilder.cs" />
     <Compile Include="Builders\ChildhoohBuilder.cs" />
@@ -229,7 +228,7 @@
     <Compile Include="Controllers\ChildController.cs" />
     <Compile Include="Controllers\ChildhoodController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Dependency\NinjectResolver.cs" />
+    <Compile Include="Dependency\NinjectControllerFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
