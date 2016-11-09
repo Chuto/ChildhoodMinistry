@@ -24,10 +24,8 @@ namespace ChildhoodMinistry.Web.Dependency
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
             IController controller = null;
-
             if (controllerType != null)
                 controller = (IController)Kernel.Get(controllerType);
-
             return controller;
         }
 
@@ -58,6 +56,11 @@ namespace ChildhoodMinistry.Web.Dependency
             );
 
             Kernel.Bind<DbContext>().To<ChildhoodMinistryContext>().InRequestScope();
+        }
+
+        public override void ReleaseController(IController controller)
+        {
+            Kernel.Release(controller);
         }
     }
 }
